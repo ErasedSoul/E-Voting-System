@@ -1,0 +1,12 @@
+
+  
+  body,
+  input {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+.navbar-fixed{
+    background-image: linear-gradient(90deg, #4035e4 10%, #5095f0 90%);;
+}

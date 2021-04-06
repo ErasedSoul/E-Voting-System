@@ -1,0 +1,30 @@
+
+POST http://localhost:4000/login 
+Content-Type: application/json
+
+{
+    "username":"hana",
+    "password":"bana"
+}
+
+###
+
+POST http://localhost:4000/signup 
+Content-Type: application/json
+
+{
+    "username":"ghana",
+    "password":"pana",
+    "emailId": "shrabana99biswas@gmail.com"
+}
+
+###
+
+POST http://localhost:4000/checkotp 
+Content-Type: application/json
+
+{
+    "username":"ghana",
+    "otp":"1234",
+    "emailId": "anirbandas0206@gmail.com"
+}
