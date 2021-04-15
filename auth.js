@@ -45,10 +45,12 @@ app.post('/login',(req,res) =>{
     const password = req.body.password;
     if(!listOfUser.get(username))
     {
+        //sql
         return res.status(403).send({message:'Username is not valid!'});
     }
     if(listOfUser.get(username) !== password)
     {
+        // sql
         return res.status(403).send({message:'Wrong Credencials!'});
     }
 
@@ -71,7 +73,11 @@ app.post('/signup',(req,res) =>{
     else{
         res.status(200).send({message:'OTP send successfully'});
     }
-    
+    //sql username password emailid Otp
+
+    // otp 
+
+
 })
 
 app.post('/checkotp',(req,res)=>{
@@ -81,7 +87,8 @@ app.post('/checkotp',(req,res)=>{
     const emailId = req.body.emailId;
     const otp = req.body.otp;
 
-    const serverOtp = 123;//get from db
+    const serverOtp = 123;//sql 
+    //query otp from the db 
 
     if(otp == serverOtp)
     {
@@ -89,6 +96,7 @@ app.post('/checkotp',(req,res)=>{
         res.status(200).send({message: "Account created & verified"});
     }
     else{
+        
         res.status(403).send({message: "Wrong OTP"}); 
     }
 
