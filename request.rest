@@ -3,8 +3,8 @@ POST http://localhost:4000/login
 Content-Type: application/json
 
 {
-    "username":"hana",
-    "password":"bana"
+    "username":"ghana",
+    "password":"pana"
 }
 
 ###
@@ -25,6 +25,6 @@ Content-Type: application/json
 
 {
     "username":"ghana",
-    "otp":"1234",
+    "otp":"833940",
     "emailId": "anirbandas0206@gmail.com"
 }
