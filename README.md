@@ -21,6 +21,6 @@ Go to the root folder in a terminal and do
 ### 10. To verify if database is created go to phpmyadmin at http://localhost
 
 
-Local Ubuntu how to start Xampp --
+For Ubuntu how to start Xampp --
 
 https://www.apachefriends.org/faq_linux.html
