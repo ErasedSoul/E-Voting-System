@@ -43,12 +43,15 @@ app.post('/login',(req,res) =>{
     //Authenticate users
     const username = req.body.username;
     const password = req.body.password;
+    console.log(username);
     if(!listOfUser.get(username))
     {
+        //sql
         return res.status(403).send({message:'Username is not valid!'});
     }
     if(listOfUser.get(username) !== password)
     {
+        // sql
         return res.status(403).send({message:'Wrong Credencials!'});
     }
 
@@ -64,14 +67,15 @@ app.post('/signup',(req,res) =>{
     const username = req.body.username;
     const password = req.body.password;
     const emailId = req.body.emailId;
+    const otp = sendOtp(emailId);
+    console.log(otp);
     
-    if(sendOtp(emailId) == false){
-        res.status(400).send({message:'OTP not send'});
-    }
-    else{
-        res.status(200).send({message:'OTP send successfully'});
-    }
+    //store in sql username password emailid Otp
     
+      
+
+
+    res.status(200).send({message:'OTP send successfully'});
 })
 
 app.post('/checkotp',(req,res)=>{
@@ -81,7 +85,8 @@ app.post('/checkotp',(req,res)=>{
     const emailId = req.body.emailId;
     const otp = req.body.otp;
 
-    const serverOtp = 123;//get from db
+    const serverOtp = 123;//sql 
+    //query otp from the db 
 
     if(otp == serverOtp)
     {
@@ -89,6 +94,7 @@ app.post('/checkotp',(req,res)=>{
         res.status(200).send({message: "Account created & verified"});
     }
     else{
+        
         res.status(403).send({message: "Wrong OTP"}); 
     }
 
@@ -104,17 +110,8 @@ function sendOtp(emailId)
         subject: 'OTP for Email Verification',
         html: `<h1>${otp}</h1>`
     };
-    let check = 
-    transporter.sendMail(otpMail,(err,info)=>{
-
-        if(error){
-            return false;
-        }
-        else{
-            return true;
-        }
-    });
-    return check;
+    transporter.sendMail(otpMail);
+    return otp;
 }
 function generateOTP() {
           
