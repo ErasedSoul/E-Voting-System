@@ -11,10 +11,29 @@ const transporter = nodemailer.createTransport({
        pass: process.env.EMAIL_PASS
     }
 });
+const mysql = require('mysql');
+
 app.use(express.json());
 
+//Create Connection
+const db = mysql.createConnection({
+    host: 'localhost',
+    user:'root',
+    password: '',
+    database: 'proj_db'
+});
+
+//connect
+db.connect((err)=> {
+    if(err)
+    {
+        throw err;
+    }
+    else console.log("MySql Connected");
+});
+
 let listOfUser = new Map();
-listOfUser.set('hana','bana');
+listOfUser.set('hello','world');
 let otp = new Map();
 
 let refreshTokens = [];
@@ -43,17 +62,41 @@ app.post('/login',(req,res) =>{
     //Authenticate users
     const username = req.body.username;
     const password = req.body.password;
-    console.log(username);
-    if(!listOfUser.get(username))
-    {
-        //sql
-        return res.status(403).send({message:'Username is not valid!'});
-    }
-    if(listOfUser.get(username) !== password)
-    {
-        // sql
-        return res.status(403).send({message:'Wrong Credencials!'});
-    }
+    //console.log("result: "+username);
+    
+    let sqluid = "SELECT COUNT(*) as `count` FROM `voters` WHERE `userid` = ? ";
+    db.query(sqluid, [username], (err, result)=>{
+        if(err)
+        {
+            throw err;
+        }
+        else {
+            console.log("result : "+result[0][`count`]);
+            if(result[0][`count`] == 0){
+
+                console.log("Not Valid!");
+                return res.status(403).send({message:'Username is not valid!'});
+            }
+            else console.log("Valid User");
+        }
+    });
+
+    let sqlpass = "SELECT password as `pw` FROM `voters` WHERE `userid` = ? ";
+    db.query(sqlpass, [username], (err, result)=>{
+        if(err)
+        {
+            throw err;
+        }
+        else {
+            console.log("result : "+result[0][`pw`]);
+            if(result[0][`pw`] !== password){
+
+                console.log("Not Valid!");
+                return res.status(403).send({message:'Wrong Credentials!'});
+            }
+            else console.log("Valid User");
+        }
+    });
 
     //Create new tokens on login
     const user = {name: username};  
@@ -68,49 +111,94 @@ app.post('/signup',(req,res) =>{
     const password = req.body.password;
     const emailId = req.body.emailId;
     const otp = sendOtp(emailId);
-    console.log(otp);
+    console.log("OTP : "+otp);
     
-<<<<<<< HEAD
-    //store in sql username password emailid Otp
+    //sql username password emailid Otp - temporary db
+    let sqlcount = "SELECT COUNT(*) as `count` FROM `temp` WHERE `userid` = ? AND `emailid` = ?";
+    db.query(sqlcount, [username, emailId], (err, result)=>{
+        if(err)
+        {
+            throw err;
+        }
+        else 
+        {
+            console.log("result : "+result[0][`count`]);
+            if(result[0][`count`] == 0){
+                let sql = "INSERT INTO temp VALUES(?, ?, ?, ?)";
+                db.query(sql, [username, password, emailId, otp], (err, result)=>{
+                    if(err)
+                    {
+                        throw err;
+                    }
+                    else {
+                        console.log("OTP Inserted!"+result);
+                    }
+                });
+                //return res.status(403).send({message:'Username is not valid!'});
+            }
+            else 
+            {
+                let sql = "UPDATE `temp` SET `otp` = ? WHERE `userid` = ? AND `emailid` = ?";
+                db.query(sql, [otp, username, emailId], (err, result)=>{
+                    if(err)
+                    {
+                        throw err;
+                    }
+                    else {
+                        console.log("OTP Updated!"+result);
+                    }
+                });
+                //return res.status(403).send({message:'Username is not valid!'});
+            }
+        }
+    });
     
-      
-
-
     res.status(200).send({message:'OTP send successfully'});
-=======
-    if(sendOtp(emailId) == false){
-        res.status(400).send({message:'OTP not send'});
-    }
-    else{
-        res.status(200).send({message:'OTP send successfully'});
-    }
-    //sql username password emailid Otp
 
-    // otp 
-
-
->>>>>>> 41bdb7a6bb042266de7951d79548d8cd1e900b7a
 })
 
 app.post('/checkotp',(req,res)=>{
 
     const username = req.body.username;
-    const password = 'password'; // actually get it from db
     const emailId = req.body.emailId;
     const otp = req.body.otp;
 
-    const serverOtp = 123;//sql 
+    //const serverOtp;//sql - temp db otp 
     //query otp from the db 
+    let sqlotp = "SELECT * FROM `temp` WHERE `userid` = ? AND `emailid` = ?";
+    db.query(sqlotp, [username,emailId], (err, result)=>{
+        if(err)
+        {
+            throw err;
+        }
+        else {
+            const serverOtp = result[0][`otp`];
+            const password = result[0][`password`];
+                console.log("result : "+result);
+                if(otp == serverOtp){
 
-    if(otp == serverOtp)
-    {
-        // store username & password in original db
-        res.status(200).send({message: "Account created & verified"});
-    }
-    else{
-        
-        res.status(403).send({message: "Wrong OTP"}); 
-    }
+                    console.log("Valid User!");
+
+                    let sql = "INSERT INTO voters VALUES(?, ?, ?)";
+                    db.query(sql, [username, emailId, password], (err, result)=>{
+                    if(err)
+                    {
+                        throw err;
+                    }
+                    else {
+                        console.log("User inserted in Voter!"+result);
+                        }
+                     });
+
+                    res.status(200).send({message: "Account created & verified"});
+                }
+                else {
+                    
+                    console.log("Wrong OTP!");
+                    res.status(403).send({message: "Wrong OTP!"});
+            }
+        }
+    });
 
 })
 
@@ -118,6 +206,7 @@ app.post('/checkotp',(req,res)=>{
 function sendOtp(emailId)
 {
     const otp = generateOTP();
+    
     let otpMail ={
         from: process.env.EMAIL_ID,
         to: emailId,
@@ -146,13 +235,9 @@ Token Authentication
 function authenticateToken(req,res,next){
    const authHeader = req.headers['authorization']
    const token = authHeader && authHeader.split(' ')[1];
-
    if(token == null ) return res.sendStatus(401);
-
    jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,user)=>{
-
         if(err) return res.sendStatus(403);
-
         req.user = user;
         next();
    })
