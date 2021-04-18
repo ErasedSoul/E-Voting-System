@@ -70,12 +70,26 @@ app.post('/signup',(req,res) =>{
     const otp = sendOtp(emailId);
     console.log(otp);
     
+<<<<<<< HEAD
     //store in sql username password emailid Otp
     
       
 
 
     res.status(200).send({message:'OTP send successfully'});
+=======
+    if(sendOtp(emailId) == false){
+        res.status(400).send({message:'OTP not send'});
+    }
+    else{
+        res.status(200).send({message:'OTP send successfully'});
+    }
+    //sql username password emailid Otp
+
+    // otp 
+
+
+>>>>>>> 41bdb7a6bb042266de7951d79548d8cd1e900b7a
 })
 
 app.post('/checkotp',(req,res)=>{
