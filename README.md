@@ -19,3 +19,8 @@ Go to the root folder in a terminal and do
 ### 8. Next to create the tables go to http://localhost:3000/fortables
 ### 9. Wait until you see Finish in the terminal.
 ### 10. To verify if database is created go to phpmyadmin at http://localhost
+
+
+Local Ubuntu how to start Xampp --
+
+https://www.apachefriends.org/faq_linux.html
