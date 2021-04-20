@@ -26,6 +26,7 @@ For Ubuntu how to start Xampp --  https://www.apachefriends.org/faq_linux.html
 
 ## To start the project -->
 
-### 1. Start Xammp
-### 2. npm start  or  node auth.js  (use any one)
-### 3. go to http://localhost:4000
+### 1. Write the email id and password in .env
+### 2. Start Xammp
+### 3. npm start  or  node auth.js  (use any one)
+### 4. Go to http://localhost:4000
