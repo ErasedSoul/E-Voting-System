@@ -2,7 +2,7 @@
   
 body{
 background-color: #e6eedb;
-background-image: url("/views/img/background.svg");
+background-image: url("/img/background.svg");
 background-attachment: fixed;
 background-size: cover;
   }
@@ -17,6 +17,12 @@ background-size: cover;
     background-image: linear-gradient(90deg, #4035e4 10%, #5095f0 90%);
     font-family: "Poppins", sans-serif;
     align-items: center;
+}
+.sidenav{
+  z-index: 5;
+}
+.sidenav-overlay{
+  z-index: 4;
 }
 #dashcard6 {
   --bg-color: #ffd861;
@@ -99,7 +105,7 @@ background-size: cover;
   top: 0%;
   left: 50%;
   transform: translate(-50%,-50%);
-  z-index: 0;
+  z-index: 1;
   transition: transform 4s ease-in;
   /*transition-timing-function: cubic-bezier(0, 1, 0.58, 1);*/
 }
@@ -111,6 +117,6 @@ background-size: cover;
   font-size: 17px;
   color: #4C5656;
   margin-top: 30px;
-  z-index: 1000;
+  z-index: 3;
   transition: color 0.3s ease-out;
 }
