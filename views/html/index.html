@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="/views/css/materialize.min.css">
-        <link rel="stylesheet" href="/views/css/index.css">
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <link rel="stylesheet" href="/css/materialize.min.css">
+        <link rel="stylesheet" href="/css/index.css">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>DVoting</title>
@@ -15,7 +16,7 @@
         <div class="container">
             <div class="forms-container">
               <div class="signin-signup">
-                <form action="#" class="sign-in-form">
+                <form  class="sign-in-form" id="signinsubmit">
                   <h2 class="title">Sign in</h2>
                   <div class="input-field">
                     <i class="fas fa-user"></i>
@@ -25,25 +26,25 @@
                     <i class="fas fa-lock"></i>
                     <input type="password" placeholder="Password" />
                   </div>
-                  <input type="submit" value="Login" class="btn solid" />
+                  <input type="submit" value="Login"class="btn solid" />
                 </form>
-                <form action="#" class="sign-up-form">
+                <form class="sign-up-form" id="signupsubmit">
                   <h2 class="title">Sign up</h2>
                   <div class="input-field">
                     <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Username" />
+                    <input type="text" name="username" placeholder="Username" />
                   </div>
                   <div class="input-field">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" placeholder="Email" />
+                    <input type="email" name="email" placeholder="Email" />
                   </div>
                   <div class="input-field">
                     <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Password" />
+                    <input type="password" name="password" placeholder="Password" />
                   </div>
                   <div class="input-field">
                     <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Confirm Password" />
+                    <input type="password" name= "confirmpassword" placeholder="Confirm Password" />
                   </div>
                   <input type="submit" class="btn" value="Sign up" />
                 </form>
@@ -99,7 +100,7 @@
                     Sign up
                   </button>
                 </div>
-                <img src="/views/img/undraw_voting_nvu7.svg" class="image" alt="" />
+                <img src="/img/undraw_voting_nvu7.svg" class="image" alt="" />
               </div>
               <div class="panel right-panel">
                 <div class="content">
@@ -108,12 +109,12 @@
                     Sign in
                   </button>
                 </div>
-                <img src="/views/img/undraw_welcome_cats_thqn.svg" class="image" alt="" />
+                <img src="/img/election_day.svg" class="image" alt="" />
               </div>
             </div>
           </div>
       
-        <script type="text/javascript" src="/views/js/materialize.min.js"></script>
-        <script type="text/javascript" src="/views/js/login.js"></script>
+        <script type="text/javascript" src="/js/materialize.min.js"></script>
+        <script type="text/javascript" src="/js/index.js"></script>
     </body>
 </html>
