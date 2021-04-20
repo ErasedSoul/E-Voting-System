@@ -20,7 +20,12 @@ Go to the root folder in a terminal and do
 ### 9. Wait until you see Finish in the terminal.
 ### 10. To verify if database is created go to phpmyadmin at http://localhost
 
+For Ubuntu how to start Xampp --  https://www.apachefriends.org/faq_linux.html
 
-For Ubuntu how to start Xampp --
 
-https://www.apachefriends.org/faq_linux.html
+
+## To start the project -->
+
+### 1. Start Xammp
+### 2. npm start  or  node auth.js  (use any one)
+### 3. go to http://localhost:4000
