@@ -25,6 +25,6 @@ Content-Type: application/json
 
 {
     "username":"ghana",
-    "otp":"833940",
+    "otp":"142490",
     "emailId": "anirbandas0206@gmail.com"
 }
