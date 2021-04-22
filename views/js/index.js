@@ -63,7 +63,7 @@ signinsubmit.addEventListener('submit',(event)=>{
        {
           sessionStorage.setItem('accessToken',data.accessToken);
           sessionStorage.setItem('refreshToken',data.refreshToken);
-          sessionStorage.setItem('refreshToken',data.refreshToken);
+          sessionStorage.setItem('userName', user);
           sweetAlert.fire({
             title: 'Login Successful',
             icon: 'success',

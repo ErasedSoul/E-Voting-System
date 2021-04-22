@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-////////////Database Connection ///////////////////////////////
+//////////// Database Connection ///////////////////////////////
 const db = mysql.createConnection({
     host: 'localhost',
     user:'root',
@@ -300,6 +300,31 @@ app.get('/about',(req,res) => {
     res.sendFile('./views/html/about.html',{root: __dirname});
 });
 
-/////////////////////////////////////////////////////////////////////////////////
+// shrabana 
+app.get('/createBallot',(req,res) => {    
+    res.sendFile('./views/html/createBallot.html',{root: __dirname});
+});
+app.get('/ballotCreated',(req,res) => {
+    res.sendFile('./views/html/ballotCreated.html',{root: __dirname});
+});
+app.get('/castVote',(req,res) => {
+    res.sendFile('./views/html/castVote.html',{root: __dirname});
+});
 
-app.listen(4000);
+/////////////////////////////////////////////////////////////////////////////////
+const port = 4000 || process.env.PORT;
+
+/************ block chain *************/
+const Web3 = require('web3');
+const truffle_connect = require('./connection/connectChain.js');
+require('./connection/connectServer.js')(app);
+/************ block chain *************/
+
+app.listen(port, () => {
+  // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+  truffle_connect.web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:7545"));
+
+  console.log("Express Listening at http://localhost:" + port);
+});
+
+// app.listen(4000);

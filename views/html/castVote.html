@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/css/materialize.min.css">
-        <link rel="stylesheet" href="/css/dashboard.css">
+       <link rel="stylesheet" href="/css/dashboard.css">  
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Dashboard</title>
+        <title>cast vote</title>
+
+        <!-- jquery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://kit.fontawesome.com/50ceab23fd.js" crossorigin="anonymous"></script>
@@ -35,12 +40,37 @@
       <li><a href="/"><span><i class="fa fa-sign-out"  aria-hidden="true"></i></span>&nbsp; &nbsp; &nbsp; &nbsp; Logout</a></li>
       </ul>
     <!--Navbar Code ends here-->  
+      
+    <div class="container-fluid">
+      <div class="row">
 
-    
+        <div class="col-md-10 col-md-offset-1">
+          <div class="send">
 
-    <h1> profile </h1>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Votes</th>
+                  </tr>
+                </thead>
+                <tbody id="candidatesResults">
+                </tbody>
+              </table>
+              
 
+              <div id = "voteForm"> </div>
+
+              <div id = "voteValidate"> </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
     <script type="text/javascript" src="/js/materialize.min.js"></script>
     <script type="text/javascript" src="/js/dashboard.js"></script>
+    <script type="text/javascript" src="/js/castVote.js"></script>
 </body>
 </html>
