@@ -1,4 +1,4 @@
-# scaling-octo-umbrella
+# Decentalized E-Voting System
 
 
 ## Installing all dependencies -->
