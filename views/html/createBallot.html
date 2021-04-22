@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>create ballot</title>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://kit.fontawesome.com/50ceab23fd.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-10 col-md-offset-1">
+        <div class="send">
+            <h2>Example Dapp</h2>
+            <h3>Your Account <span class="black" id="account"></span></h3>
+
+          <div id = "ballot">
+              
+              <p> ballot name 
+              <input type="text" id="ballotName" placeholder="name"> </p>
+              <p>start time
+              <input type="text" id="startTime" placeholder="start time"></p>
+              <p>end time
+              <input type="text" id="endTime" placeholder="end time"> </p>
+
+              <p>candidates </p>
+              <div id="myDIV" >
+                  <input type="text" id="myInput" placeholder="candidate i">
+                  <button onclick="newElement()" class="addBtn">Add </button>
+              </div>
+
+              <ul id="myUL"></ul>  
+
+              <br/>
+              <button onclick="update()" class="addBtn"> submit </button>
+
+              <p> ballot name:  <span id="bName"> </span>  </p>
+              <p>start time: <span id="bST"> </span>  </p>
+              <p>end time: <span id="bET"> </span>  </p>
+              <p>candidates: <span id="bCans"> </span>  </p> 
+                          
+              <br/>
+              <button onclick="setBallot();" class="addBtn"> transact  </button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/js/dashboard.js"></script>
+    <script type="text/javascript" src="/js/createBallot.js"></script>
+</body>
+</html>
