@@ -1,0 +1,163 @@
+:root {
+    --bg: #17181c;
+    --fg: #e3e4e8;
+    font-size: calc(12px + (16 - 12)*(100vw - 480px)/(1280 - 480));
+}
+body{
+    font: 0.6666666667em Helvetica, sans-serif;
+}
+body {
+    background: var(--bg);
+    color: var(--fg);
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+.four{
+    height: 400px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    transform: translate(7%);
+}
+.mouth, .arm, .curtain, .table {
+    will-change: transform;
+}
+.container, .trajectory, .curtain {
+    background: inherit;
+}
+.guy, .arm, .trajectory {
+    border: 0.4em solid transparent;
+}
+.guy, .arm, .legs {
+    border-right: 0.4em solid;
+}
+.guy, .legs {
+    border-left: 0.4em solid;
+}
+.eye, .mouth, .arm {
+    position: absolute;
+}
+.eye, .arm {
+    border-radius: 50%;
+}
+.table, .legs {
+    height: 1.6em;
+}
+.container {
+    height: 10em;
+    min-width: 37.5em;
+    position: relative;
+}
+.container > div {
+    position: absolute;
+}
+.guy {
+    border-radius: 15% / 60%;
+    width: 13em;
+    height: 5em;
+}
+.eye {
+    border: 0.4em solid;
+    width: 1em;
+    height: 1em;
+    top: 15%;
+    left: 45%;
+    animation: eyes 3s linear;
+}
+.eye + .eye {
+    left: 80%;
+}
+.mouth {
+    box-shadow: 0 0 0 0.2em currentColor inset;
+    width: 1.6em;
+    height: 1.6em;
+    top: 48%;
+    left: 64%;
+    animation: mouth 3s cubic-bezier(0.17, 0.81, 0.29, 0.94);
+}
+.arm {
+    width: 2.5em;
+    height: 3.5em;
+    top: -25%;
+    left: -10%;
+    transform-origin: 80% 80%;
+    transform: rotate(45deg);
+    animation: arms 5s cubic-bezier(0, 1, 0, 1);
+}
+.arm + .arm {
+    left: 90%;
+}
+
+.table {
+    border-bottom: 0.4em solid;
+    width: 12em;
+    top: 3.2em;
+    left: 57%;
+    transform: translateX(4.2em);
+    transform-origin: -31% 50%;
+    animation: table 5s linear;
+}
+.legs {
+    margin: auto;
+    width: 70%;
+}
+.no-anim div, .no-anim + button {
+    animation: none;
+}
+/* Animations */
+@keyframes eyes {
+    from, 30%, 38%, 70% {
+        background: var(--fg);
+        border: 0;
+        transform: translate(0.4em, 0.4em) scale(1, 1);
+   }
+    34% {
+        background: var(--fg);
+        border: 0;
+        transform: translate(0.4em, 0.4em) scale(1, 0);
+   }
+    74.9% {
+        background: var(--fg);
+        border: 0;
+        transform: translate(0.4em, 0.4em) scale(1.5, 0);
+   }
+    75%, to {
+        background: transparent;
+        border: 0.4em solid;
+        transform: translate(0, 0);
+   }
+}
+@keyframes mouth {
+    from, 75% {
+        height: 0.2em;
+        transform: translateY(0.8em);
+   }
+    87.5%, to {
+        height: 1.6em;
+        transform: translateY(0);
+   }
+}
+@keyframes arms {
+    from, 75% {
+        transform: rotate(155deg);
+   }
+    to {
+        transform: rotate(45deg);
+   }
+}
+@keyframes table {
+    from, 75% {
+        transform: translateX(3.6em) rotate(-180deg);
+   }
+    93% {
+        transform: translateX(3.6em) rotate(0);
+   }
+    to {
+        transform: translateX(4.2em) rotate(0);
+   }
+}

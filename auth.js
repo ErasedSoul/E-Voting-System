@@ -37,6 +37,7 @@ db.connect((err)=> {
 
 ////////////AUTHENTICATION///////////////////////////////////////////
 
+
 //create new token using refresh token
 app.post('/token',(req,res) => {
 
@@ -229,6 +230,10 @@ app.post('/checkotp',(req,res)=>{
 
 })
 
+// ballot sql modules imported and used
+const ballotquery = require('./routes/ballotquery');
+app.use(ballotquery);
+
 
 function sendOtp(emailId)
 {
@@ -276,7 +281,6 @@ function authenticateToken(req,res,next){
 
 
 /////////////////Routing///////////////////////////////////////////////////////////
-
 
 
 app.get('/',(req,res) => {
@@ -327,4 +331,20 @@ app.listen(port, () => {
   console.log("Express Listening at http://localhost:" + port);
 });
 
-// app.listen(4000);
+
+
+
+
+
+
+
+
+
+
+// Handling 404
+// This should reamin at the bottom of the file 
+app.use(function(req,res){
+    res.status(404);
+    res.sendFile('./views/html/404.html',{root: __dirname});
+})
+
