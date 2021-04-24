@@ -5,7 +5,8 @@
         <link rel="stylesheet" href="/css/dashboard.css">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Dashboard</title>
+        <title>User/Ongoing</title>
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://kit.fontawesome.com/50ceab23fd.js" crossorigin="anonymous"></script>
@@ -35,35 +36,16 @@
       <li><a href="/"><span><i class="fa fa-sign-out"  aria-hidden="true"></i></span>&nbsp; &nbsp; &nbsp; &nbsp; Logout</a></li>
       </ul>
     <!--Navbar Code ends here-->  
+      
 
-     
-          
-        <div class="row">
-          <div class="col s12 m6 l4">  
-        <a href="/html/ballotUserOngoing.html" id ="dashcard1" class="dashcard "> <div class="overlay"></div>
-          <p>Ongoing Ballots(User made)</p>
-        </a>
-        <a href="/html/ballotInviteOngoing.html" id ="dashcard2" class="dashcard"> <div class="overlay"></div>
-          <p>Ongoing Ballots(Invites)</p>
-        </a>
-          </div>
-          <div class="col s12 m6 l4">
-            <a href="/html/ballotUserFinished.html" id ="dashcard3" class="dashcard"> <div class="overlay"></div>
-              <p>Past Ballots(User made)</p></a>
-            <a href="/html/ballotInviteFinished.html" id ="dashcard4" class="dashcard "> <div class="overlay"></div>
-              <p>Past Ballots(Invites)</p>
-            </a>
-      </div>
-      <div class="col s12 m6 l4">
-        <a href="/html/ballotUserUpcoming.html" id ="dashcard5" class="dashcard "> <div class="overlay"></div>
-          <p>Upcoming Ballots(User made)</p>
-        </a>
-        <a href="/html/ballotInviteUpcoming.html" id ="dashcard6" class="dashcard "> <div class="overlay"></div>
-          <p>Upcoming Ballots(Invites)</p>
-        </a>
-      </div>
-      </div>
+      
+        <div id="content">
+          <div id = "ballotList"></div>
+        </div>
+
+
     <script type="text/javascript" src="/js/materialize.min.js"></script>
     <script type="text/javascript" src="/js/dashboard.js"></script>
+    <script type="text/javascript" src="/js/ballotUserOngoing.js"></script>
 </body>
 </html>

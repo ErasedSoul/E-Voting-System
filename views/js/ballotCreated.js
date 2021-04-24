@@ -1,7 +1,6 @@
-
 function showBallot(){
     let ballotCount; 
-    var ballotList = document.getElementById("ballotList");
+    let ballotList = document.getElementById("ballotList");
 
     fetch('/getBallotCount')
     .then(response => response.json())    // one extra step

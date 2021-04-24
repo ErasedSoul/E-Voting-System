@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const express = require('express');
 const router = require('express').Router();
 const db = mysql.createConnection({
     host: 'localhost',
@@ -7,15 +8,21 @@ const db = mysql.createConnection({
     database: 'proj_db'
 });
 
-router.get('/user/ongoing',(req,res)=>{
-    
-//do sql query and just console.log the output or just send the query object in res.send()
+router.use(express.json({limit: '1mb'}));
 
-    res.send("Hello World");
+router.post('/user/ongoing',(req,res)=>{
+    console.log(req.body.username);
+    let ballots = [];
+//do sql query and just console.log the output or just send the query object in res.send()
+    ballots.push({bid: "#3232", bname: "vote 1",startTime: "12-32-34",endTime:"2323"});
+    ballots.push({bid: "#3323", bname: "vote 2",startTime: "12-32-34",endTime:"2323"});
+    res.setHeader('Content-Type', 'application/json');
+    res.json({ballots: ballots});
+    return;
 })
 
 
-router.get('/user/finished',(req,res)=>{
+router.post('/user/finished',(req,res)=>{
 
     //do sql query and just console.log the output or just send the query object in res.send()
 
@@ -23,7 +30,7 @@ router.get('/user/finished',(req,res)=>{
 })
 
 
-router.get('/user/upcoming',(req,res)=>{
+router.post('/user/upcoming',(req,res)=>{
 
 //do sql query and just console.log the output or just send the query object in res.send()
 
@@ -34,7 +41,7 @@ router.get('/user/upcoming',(req,res)=>{
 
 
 
-router.get('/invites/ongoing',(req,res)=>{
+router.post('/invites/ongoing',(req,res)=>{
     
     const username = request.body.username;
 //do sql query and just console.log the output or just send the query object in res.send()
@@ -43,14 +50,14 @@ router.get('/invites/ongoing',(req,res)=>{
 })
 
 
-router.get('/invites/finished',(req,res)=>{
+router.post('/invites/finished',(req,res)=>{
     
 //do sql query and just console.log the output or just send the query object in res.send()
     
     res.send("Hello World");
 })
 
-router.get('/invites/upcoming',(req,res)=>{
+router.post('/invites/upcoming',(req,res)=>{
     
 //do sql query and just console.log the output or just send the query object in res.send()
 

@@ -235,6 +235,8 @@ const ballotquery = require('./routes/ballotquery');
 app.use(ballotquery);
 
 
+
+
 function sendOtp(emailId)
 {
     const otp = generateOTP();
@@ -314,6 +316,34 @@ app.get('/ballotCreated',(req,res) => {
 app.get('/castVote',(req,res) => {
     res.sendFile('./views/html/castVote.html',{root: __dirname});
 });
+app.get('/user/ongoing',(req,res) => {
+    
+    res.sendFile('./views/html/ballotUserOngoing.html',{root: __dirname});
+});
+
+//dashboard links
+app.get('/user/finished',(req,res) => {
+    
+    res.sendFile('./views/html/ballotUserFinished.html',{root: __dirname});
+});
+app.get('/user/upcoming',(req,res) => {
+    
+    res.sendFile('./views/html/ballotUserUpcoming.html',{root: __dirname});
+});
+
+app.get('/invite/ongoing',(req,res) => {
+    
+    res.sendFile('./views/html/ballotInviteOngoing.html',{root: __dirname});
+});
+app.get('/invite/finished',(req,res) => {
+    
+    res.sendFile('./views/html/ballotInviteFinished.html',{root: __dirname});
+});
+app.get('/invite/upcoming',(req,res) => {
+    
+    res.sendFile('./views/html/ballotInviteUpcoming.html',{root: __dirname});
+});
+
 
 /////////////////////////////////////////////////////////////////////////////////
 const port = 4000 || process.env.PORT;
