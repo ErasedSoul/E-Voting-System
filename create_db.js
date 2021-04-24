@@ -44,35 +44,51 @@ app.get('/fortables', (req,res) => {
         else console.log("voters table created!");
     });
 
-    let q2 = 'CREATE TABLE ballots (bname VARCHAR(50) PRIMARY KEY, startdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, enddate TIMESTAMP DEFAULT CURRENT_TIMESTAMP)';
+    let q2 = 'CREATE TABLE ballots (ballotid VARCHAR(50) PRIMARY KEY, bname VARCHAR(50) NOT NULL, startdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, enddate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, userid VARCHAR(50) NOT NULL)';
     db2.query(q2, (err,res) => {
         if(err) throw err;
         else console.log("ballots table created!");
     });
 
-    let q3 = 'CREATE TABLE `voter-ballot` (`userid` VARCHAR(50) NOT NULL, `bname` VARCHAR(50) NOT NULL)';
+    let q3 = 'CREATE TABLE `voter-ballot` (`userid` VARCHAR(50) NOT NULL, `ballotid` VARCHAR(50) NOT NULL)';
     db2.query(q3, (err,res) => {
         if(err) throw err;
         else console.log("voter-ballot table created!");
     });
 
-    let q9 = 'ALTER TABLE `voter-ballot` ADD CONSTRAINT `fk_name` FOREIGN KEY (`userid`) REFERENCES `voters`(`userid`) ON DELETE CASCADE ON UPDATE CASCADE';
+    let q4 = 'CREATE TABLE notifs (userid1 VARCHAR(50) NOT NULL, userid2 VARCHAR(50) NOT NULL, ballotid VARCHAR(50) NOT NULL, content VARCHAR(100) NOT NULL, createTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP)';
+    db2.query(q4, (err,res) => {
+        if(err) throw err;
+        else console.log("notifs table created!");
+    });
+
+    //username password emailid Otp
+    let q10 = 'CREATE TABLE temp (userid VARCHAR(50) NOT NULL, password VARCHAR(50) NOT NULL, emailid VARCHAR(50) NOT NULL, otp INT NOT NULL)';
+    db2.query(q10, (err,res) => {
+        if(err) throw err;
+        else {           
+        console.log("temp table created!");
+        console.log("Finished");
+    }
+    });
+
+    let q45 = 'ALTER TABLE `ballots` ADD CONSTRAINT `fk_name` FOREIGN KEY (`userid`) REFERENCES `voters`(`userid`) ON DELETE CASCADE ON UPDATE CASCADE';
+    db2.query(q45, (err,res) => {
+        if(err) throw err;
+        else console.log("Foreign Key Updated!");
+    });
+
+    let q9 = 'ALTER TABLE `voter-ballot` ADD CONSTRAINT `fk_uname` FOREIGN KEY (`userid`) REFERENCES `voters`(`userid`) ON DELETE CASCADE ON UPDATE CASCADE';
     db2.query(q9, (err,res) => {
         if(err) throw err;
         else console.log("Foreign Key Updated!");
     });
 
     //ALTER TABLE `voter-ballot` ADD CONSTRAINT `fk_name` FOREIGN KEY (`userid`) REFERENCES `voters`(`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
-    let q7 = 'ALTER TABLE `voter-ballot` ADD CONSTRAINT `fk_bname` FOREIGN KEY (`bname`) REFERENCES `ballots`(`bname`) ON DELETE CASCADE ON UPDATE CASCADE';
+    let q7 = 'ALTER TABLE `voter-ballot` ADD CONSTRAINT `fk_bname` FOREIGN KEY (`ballotid`) REFERENCES `ballots`(`ballotid`) ON DELETE CASCADE ON UPDATE CASCADE';
     db2.query(q7, (err,res) => {
         if(err) throw err;
         else console.log("Foreign Key Updated!");
-    });
-
-    let q4 = 'CREATE TABLE notifs (userid1 VARCHAR(50) NOT NULL, userid2 VARCHAR(50) NOT NULL, bname VARCHAR(50) NOT NULL, content VARCHAR(100) NOT NULL)';
-    db2.query(q4, (err,res) => {
-        if(err) throw err;
-        else console.log("notifs table created!");
     });
 
     let q5 = 'ALTER TABLE `notifs` ADD CONSTRAINT `fk_uname1` FOREIGN KEY (`userid1`) REFERENCES `voters`(`userid`) ON DELETE CASCADE ON UPDATE CASCADE';
@@ -87,21 +103,12 @@ app.get('/fortables', (req,res) => {
         else console.log("Foreign Key Updated!");
     });
 
-    let q8 = 'ALTER TABLE `notifs` ADD CONSTRAINT `fk_ballname` FOREIGN KEY (`bname`) REFERENCES `ballots`(`bname`) ON DELETE CASCADE ON UPDATE CASCADE';
+    let q8 = 'ALTER TABLE `notifs` ADD CONSTRAINT `fk_ballname` FOREIGN KEY (`ballotid`) REFERENCES `ballots`(`ballotid`) ON DELETE CASCADE ON UPDATE CASCADE';
     db2.query(q8, (err,res) => {
         if(err) throw err;
         else console.log("Foreign Key Updated!");
     });
 
-    //username password emailid Otp
-    let q10 = 'CREATE TABLE temp (userid VARCHAR(50) NOT NULL, password VARCHAR(50) NOT NULL, emailid VARCHAR(50) NOT NULL, otp INT NOT NULL)';
-    db2.query(q10, (err,res) => {
-        if(err) throw err;
-        else {           
-        console.log("temp table created!");
-        console.log("Finished");
-    }
-    });
     res.send({message: "Tables Created"});
 })
 
