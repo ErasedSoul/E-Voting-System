@@ -43,7 +43,7 @@ async function showBallot(){
             }); 
       });
          */
-        card.innerHTML+= "<p>" + ballots[i].ballotname + "<br>" +
+        card.innerHTML+= "<p>" + ballots[i].bname + "<br>" +
         "ballot id :"+ballots[i].ballotid+"<br>"+
         "starting from:" + ballots[i].startdate + "<br>" +
         "ending at:" + ballots[i].enddate + "</p>";
