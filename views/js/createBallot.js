@@ -76,6 +76,22 @@ function setBallot(){
   .then(function (response) {
     console.log("ballot set!!, page will refresh");
     // flushAll();
+    //Sayanti
+    fetch('./fetchsql',
+    {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        startTime: startTime,
+        endTime: endTime,
+        username: window.sessionStorage.userName,
+      })
+    }
+    )
     window.location = "http://localhost:4000/ballotCreated";
     // viewBallot();
   })

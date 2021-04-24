@@ -12,8 +12,8 @@ async function showBallot(){
     })
     })
 
-   let data = await res.json();
-   ballots = data.ballots;
+   let ballots = await res.json();
+   //ballots = data.ballots;
 
    console.log(ballots.length);
 
