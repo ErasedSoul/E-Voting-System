@@ -24,7 +24,7 @@ router.post('/user/ongoing',(req,res)=>{
         }
         else {
             res.send(result);
-            console.log("Ballot details inserted in ballots!"+result[0].ballotid);
+            //console.log("Ballot details inserted in ballots!"+result[0].ballotid);
         }
     });
 
