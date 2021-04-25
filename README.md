@@ -1,5 +1,9 @@
 # Decentalized E-Voting System
 
+## How to clone a specific branch from terminal -->
+
+### git clone --branch <branch-name> <repository-url>
+
 
 ## Installing all dependencies -->
 
