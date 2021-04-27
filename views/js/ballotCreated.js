@@ -2,7 +2,12 @@ function showBallot(){
     let ballotCount; 
     let ballotList = document.getElementById("ballotList");
 
-    fetch('/getBallotCount')
+    fetch('/getBallotCount',{
+      withCredentials: true,credentials: 'include',
+      headers: {
+        'Authorization': `Bearer ${sessionStorage['accessToken']}`
+      }
+    })
     .then(response => response.json())    // one extra step
     .then(response => {
       console.log("inside viewBallot: ", response);
@@ -13,10 +18,12 @@ function showBallot(){
         for (var i = 1; i <= ballotCount; i++) { 
             fetch('./ballot_i',
             {
+              withCredentials: true,credentials: 'include',
               method: 'post',
               headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage['accessToken']}`
               },
               body: JSON.stringify({
                 id: i,
@@ -31,9 +38,11 @@ function showBallot(){
                   card.addEventListener("click", function() {
                       fetch('./setBallotID',{
                         method: 'post',
+                        withCredentials: true,credentials: 'include',
                         headers: {
                           'Accept': 'application/json',
-                          'Content-Type': 'application/json'
+                          'Content-Type': 'application/json',
+                          'Authorization': `Bearer ${sessionStorage['accessToken']}`
                         },
                         body: JSON.stringify({
                           id: response.id,

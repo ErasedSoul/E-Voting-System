@@ -19,11 +19,11 @@
          <a href = "#" class = "brand-logo">Logo</a>
          <a href="#" id = "right_nav" data-target="mobile-data" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li class="active"><a href="/dashboard"><span><i class="fa fa-home" style= "position:absolute; top: 30%;" aria-hidden="true"></i></span>&nbsp; &nbsp; &nbsp; &nbsp; Home</a></li> 
+            <li><a href="/dashboard"><span><i class="fa fa-home" style= "position:absolute; top: 30%;" aria-hidden="true"></i></span>&nbsp; &nbsp; &nbsp; &nbsp; Home</a></li> 
             <li><a href="#"><span><i class="fa fa-bell" style= "position:absolute; top: 30%;" aria-hidden="true"></i></span>&nbsp; &nbsp; &nbsp; &nbsp; Notifications</a></li> 
             <li><a href="/profile"> <span><i class="fa fa-user" style= "position:absolute; top: 30%;" aria-hidden="true"></i></span>&nbsp; &nbsp; &nbsp; &nbsp; Profile</a></li>
             <li><a href="/about"><span><i class="fa fa-info-circle" style= "position:absolute; top: 30%;" aria-hidden="true"></i></span>&nbsp; &nbsp; &nbsp; &nbsp; About</a></li>
-            <li><a href="/"><span><i class="fa fa-sign-out" style= "position:absolute; top: 30%;" aria-hidden="true"></i></span>&nbsp; &nbsp; &nbsp; &nbsp; Logout</a></li>
+            <li><a class="deleteTokens" href="/"><span><i class="fa fa-sign-out" style= "position:absolute; top: 30%;" aria-hidden="true"></i></span>&nbsp; &nbsp; &nbsp; &nbsp; Logout</a></li>
           </ul>
         </div>
     </nav>
@@ -33,7 +33,7 @@
       <li><a href="#"><span><i class="fa fa-bell" aria-hidden="true"></i></span>&nbsp; &nbsp; &nbsp; &nbsp; Notifications</a></li> 
       <li><a href="/profile"> <span><i class="fa fa-user"  aria-hidden="true"></i></span>&nbsp; &nbsp; &nbsp; &nbsp; Profile</a></li>
       <li><a href="/about"><span><i class="fa fa-info-circle"  aria-hidden="true"></i></span>&nbsp; &nbsp; &nbsp; &nbsp; About</a></li>
-      <li><a href="/"><span><i class="fa fa-sign-out"  aria-hidden="true"></i></span>&nbsp; &nbsp; &nbsp; &nbsp; Logout</a></li>
+      <li><a class="deleteTokens" href="/"><span><i class="fa fa-sign-out"  aria-hidden="true"></i></span>&nbsp; &nbsp; &nbsp; &nbsp; Logout</a></li>
       </ul>
     <!--Navbar Code ends here-->  
       
@@ -42,8 +42,12 @@
         <div id="content">
           <div id = "ballotList"></div>
         </div>
-
-
+        
+        <div class="fixed-action-btn tooltipped" data-position="left" data-tooltip="Create a Ballot">
+          <a href="/html/createBallot.html" class="waves-effect waves-light btn btn-floating btn-large blue">
+            <i id="createBallot" class="fas fa-plus"></i>
+          </a>
+        </div>
     <script type="text/javascript" src="/js/materialize.min.js"></script>
     <script type="text/javascript" src="/js/dashboard.js"></script>
     <script type="text/javascript" src="/js/ballotCreated.js"></script>

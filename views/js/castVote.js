@@ -6,7 +6,13 @@ function date(utcSeconds){
 }
 
 function votedORnot(){
-    fetch('/votedORnot')
+    fetch('/votedORnot',{
+      withCredentials: true,
+      credentials: 'include',
+        headers: {
+          'Authorization': `Bearer ${sessionStorage['accessToken']}`
+        }
+    })
     .then(response => response.json())    // one extra step
     .then(response => {
       console.log(response);
@@ -27,9 +33,12 @@ function vote(candidateId){
   fetch('./vote',
   {
     method: 'post',
+    withCredentials: true,
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${sessionStorage['accessToken']}`
     },
     body: JSON.stringify({
       id: candidateId, // send only candidate id
@@ -51,7 +60,13 @@ function viewCandidates(){
     var candidatesResults = $("#candidatesResults");
     candidatesResults.empty();
 
-    fetch('/viewCandidates')
+    fetch('/viewCandidates',{
+      withCredentials: true,
+      credentials: 'include',
+      headers: {
+        'Authorization': `Bearer ${sessionStorage['accessToken']}`
+      }
+    })
     .then(response => response.json())    // one extra step
     .then(response => {
 
@@ -62,10 +77,13 @@ function viewCandidates(){
         for (var i = 1; i <= canCount; i++) { 
             fetch('./candidate_i',
             {
+              withCredentials: true,
+              credentials: 'include',
               method: 'post',
               headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage['accessToken']}`
               },
               body: JSON.stringify({
                 id: i, // send only candidate id
@@ -89,10 +107,12 @@ function viewCandidates(){
                   candidate.addEventListener("click", function(){
                       fetch('./vote',
                       {
+                        withCredentials: true,credentials: 'include',
                         method: 'post',
                         headers: {
                           'Accept': 'application/json',
-                          'Content-Type': 'application/json'
+                          'Content-Type': 'application/json',
+                          'Authorization': `Bearer ${sessionStorage['accessToken']}`
                         },
                         body: JSON.stringify({
                           id: response.id, // send only candidate id

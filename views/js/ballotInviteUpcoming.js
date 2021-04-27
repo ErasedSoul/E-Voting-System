@@ -3,9 +3,11 @@ async function showBallot(){
     const url = "http://localhost:4000/invite/upcoming";
  
     let res  = await fetch(url,{
-     method: 'POST', 
+     method: 'POST',
+     withCredentials: true,credentials: 'include', 
      headers: {
-       'Content-Type': 'application/json'
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${sessionStorage['accessToken']}`
      },
      body: JSON.stringify({
          username: window.sessionStorage.userName,
