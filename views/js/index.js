@@ -46,14 +46,13 @@ signinsubmit.addEventListener('submit',(event)=>{
         headers: {
           'Content-Type': 'application/json'
         },
-        method: 'POST',
+        credentials: 'include',
         body: JSON.stringify({
             username: user,
             password: pass
         }) 
-    }).then(res => {
-           
-      return res.text()
+    }).then(res => {     
+       return res.text();
     })
     .then(data => {
        return JSON.parse(data)

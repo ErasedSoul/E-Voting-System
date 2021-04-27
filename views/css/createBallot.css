@@ -1,0 +1,78 @@
+
+#regForm {
+     background-color: #ffffff;
+     box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+     margin: 50px auto;
+     padding: 40px;
+     width: 70%;
+     min-width: 300px;
+   }
+   
+   /* Hide all steps by default: */
+   .tab {
+     text-align:center; 
+     display: none;
+   }
+   
+   /* Make circles that indicate the steps of the form: */
+   .step {
+     height: 15px;
+     width: 15px;
+     margin: 0 2px;
+     background-color: #599df5;
+     border: none;
+     border-radius: 50%;
+     display: inline-block;
+     opacity: 0.2;
+   }
+   
+   /* Mark the active step: */
+   .step.active {
+     opacity: 1;
+   }
+   
+   /* Mark the steps that are finished and valid: */
+   .step.finish {
+     background-color: #0cf514;
+   }
+
+   #candidates{
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-height: 150px;
+   }
+
+   #candidates::-webkit-scrollbar {
+     width: 10px;
+   }
+   #candidates::-webkit-scrollbar-track {
+     background: teal;
+     border-radius: 10px;
+   }
+   #candidates::-webkit-scrollbar-thumb {
+     background: #ebf1eb;
+     border-radius: 10px;
+   }
+
+
+#voters{
+     overflow-y: auto;
+     overflow-x: hidden;
+     max-height: 150px;
+}
+
+#voters::-webkit-scrollbar {
+  width: 10px;
+}
+#voters::-webkit-scrollbar-track {
+  background: teal;
+  border-radius: 10px;
+}
+#voters::-webkit-scrollbar-thumb {
+  background: #dee6de;
+  border-radius: 10px;
+}
+
+blue{
+     background: bl;
+}

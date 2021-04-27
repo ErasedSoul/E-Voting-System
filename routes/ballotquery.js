@@ -1,6 +1,13 @@
 const mysql = require('mysql');
 const express = require('express');
 const router = require('express').Router();
+const jwt = require('jsonwebtoken');
+const path = require('path');
+router.use(express.json());
+const cookieParser = require('cookie-parser');
+router.use(cookieParser());
+
+
 const db = mysql.createConnection({
     host: 'localhost',
     user:'root',
@@ -8,9 +15,7 @@ const db = mysql.createConnection({
     database: 'proj_db'
 });
 
-router.use(express.json({limit: '1mb'}));
-
-router.post('/user/ongoing',(req,res)=>{
+router.post('/user/ongoing',auth,(req,res)=>{
     const username = req.body.username;
     //let ballots = [];
     
@@ -37,7 +42,7 @@ router.post('/user/ongoing',(req,res)=>{
 })
 
 
-router.post('/user/finished',(req,res)=>{
+router.post('/user/finished',auth,(req,res)=>{
 
     //do sql query and just console.log the output or just send the query object in res.send()
 
@@ -60,7 +65,7 @@ router.post('/user/finished',(req,res)=>{
 })
 
 
-router.post('/user/upcoming',(req,res)=>{
+router.post('/user/upcoming',auth,(req,res)=>{
 
     const username = req.body.username;
     //let ballots = [];
@@ -86,7 +91,7 @@ router.post('/user/upcoming',(req,res)=>{
 
 
 
-router.post('/invites/ongoing',(req,res)=>{
+router.post('/invites/ongoing',auth,(req,res)=>{
     
     const username = request.body.username;
 //do sql query and just console.log the output or just send the query object in res.send()
@@ -95,19 +100,31 @@ router.post('/invites/ongoing',(req,res)=>{
 })
 
 
-router.post('/invites/finished',(req,res)=>{
+router.post('/invites/finished',auth,(req,res)=>{
     
 //do sql query and just console.log the output or just send the query object in res.send()
     
     res.send("Hello World");
 })
 
-router.post('/invites/upcoming',(req,res)=>{
+router.post('/invites/upcoming',auth,(req,res)=>{
     
 //do sql query and just console.log the output or just send the query object in res.send()
 
 
     res.send("Hello World");
 })
+
+function auth(req,res,next){
+    if(req.cookies == null)
+    return res.sendStatus(401);
+    const token = req.cookies.accessToken;
+    if(token == null ) return res.sendStatus(401);
+    jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,user)=>{
+         if(err) return res.sendStatus(401);
+         next();
+    })
+}
+
 
 module.exports = router;

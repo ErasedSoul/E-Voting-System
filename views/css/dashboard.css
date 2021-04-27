@@ -1,11 +1,26 @@
 
   
 body{
-background-color: #e6eedb;
-background-image: url("/img/background.svg");
-background-attachment: fixed;
-background-size: cover;
+  /*background:linear-gradient(rgba(196, 102, 0, 0.2), rgba(155, 89, 182, 0.2)),	url('http://thecodeplayer.com/uploads/media/gs.png');*/
+  background: url("/img/background2.svg");
+  /*animation: gradient 30s ease infinite;*/
+  background-size:cover ;
+
   }
+  
+  @keyframes gradient {
+    0% {
+      background-size: 120% 200%;
+    }
+    50% {
+      background-size: 130% 200%;
+    }
+    100% {
+      background-size: 120% 200%;
+    }
+  }
+
+
   input {
     font-family: "Poppins", sans-serif;
     margin: 0;
@@ -13,16 +28,17 @@ background-size: cover;
   }
 
 .navbar-fixed{
-  width: 100%;
+    width: 100vw;
+    min-width: 300px;
     background-image: linear-gradient(90deg, #4035e4 10%, #5095f0 90%);
     font-family: "Poppins", sans-serif;
     align-items: center;
 }
 .sidenav{
-  z-index: 5;
+  z-index: 1001;
 }
 .sidenav-overlay{
-  z-index: 4;
+  z-index: 1000;
 }
 #dashcard6 {
   --bg-color: #ffd861;
@@ -70,12 +86,12 @@ background-size: cover;
 .dashcard:hover {
   transform: translateY(-10px) scale(1.005) translateZ(0);
   box-shadow: 0 24px 36px rgba(0,0,0,0.11),
-    0 24px 46px var(--box-shadow-color);
+    0 24px 46px rgba(0,0,0,0.11);
 }
 .dashcard:active {
-  transform: scale(2) translateZ(0);
+  transform: scale(0) translateZ(0);
   box-shadow: 0 15px 24px rgba(19, 18, 18, 0.11),
-    0 15px 24px teal;
+    0 15px 24px rgba(0,0,0,0.11);
 }
 
 .overlay {
@@ -92,7 +108,7 @@ background-size: cover;
   /*transition-timing-function: cubic-bezier(0, 1, 0.58, 1);*/
 }
 .dashcard:hover .overlay {
-  transform: scale(700) translateZ(0);
+  transform: scale(400) translateZ(0);
 }
 
 .dashcard p {
@@ -100,5 +116,5 @@ background-size: cover;
   color: #4C5656;
   margin-top: 30px;
   z-index: 3;
-  transition: color 0.3s ease-out;
+  transition: color 1s ease-out;
 }

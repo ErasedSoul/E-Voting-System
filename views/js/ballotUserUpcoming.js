@@ -3,9 +3,11 @@ async function showBallot(){
     const url = "http://localhost:4000/user/upcoming";
  
     let res  = await fetch(url,{
-     method: 'POST', 
+     method: 'POST',
+     withCredentials: true,credentials: 'include', 
      headers: {
-       'Content-Type': 'application/json'
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${sessionStorage['accessToken']}`
      },
      body: JSON.stringify({
          username: window.sessionStorage.userName,
@@ -33,7 +35,8 @@ async function showBallot(){
              method: 'post',
              headers: {
                'Accept': 'application/json',
-               'Content-Type': 'application/json'
+               'Content-Type': 'application/json',
+               'Authorization': `Bearer ${sessionStorage['accessToken']}`
              },
              body: JSON.stringify({
                id: ballots[i].id,
