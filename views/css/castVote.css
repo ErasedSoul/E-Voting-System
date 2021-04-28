@@ -1,0 +1,54 @@
+#voteForm,#voteValidate,table {
+    border-collapse: collapse;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    margin: 40px auto;
+    padding: 40px;
+    width: 70%;
+    min-width: 300px;
+}
+
+#voteValidate{
+    margin-top: 30px;
+    text-align: center;
+    display: none;
+}
+#voteForm{
+    margin-top: 30px;
+    text-align: center;
+    padding: 10px;
+}
+
+tr {
+    transition: all 0.2s ease-in;
+    cursor: pointer;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+#header {
+    background-color: #599df5;
+    color: #fff;
+}
+tr:hover {
+    color:teal;
+    background-color: #f5f5f5;
+    transform: scale(1.01);
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width: 768px) {
+    table {
+        width: 90%;
+    }
+}
+
+
+#votebutton{
+    background: #4035e4;
+}

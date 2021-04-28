@@ -2,9 +2,9 @@
   
 body{
   /*background:linear-gradient(rgba(196, 102, 0, 0.2), rgba(155, 89, 182, 0.2)),	url('http://thecodeplayer.com/uploads/media/gs.png');*/
-  background: url("/img/background2.svg");
+  background-image: url("/img/background.svg");
   /*animation: gradient 30s ease infinite;*/
-  background-size:cover ;
+  background-size:400% 400% ;
 
   }
   
@@ -28,7 +28,7 @@ body{
   }
 
 .navbar-fixed{
-    width: 100vw;
+    width: 100%;
     min-width: 300px;
     background-image: linear-gradient(90deg, #4035e4 10%, #5095f0 90%);
     font-family: "Poppins", sans-serif;

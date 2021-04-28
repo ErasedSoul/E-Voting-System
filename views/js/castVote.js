@@ -1,6 +1,7 @@
+
 function date(utcSeconds){
-    // var utcSeconds = 1234567890;
-    var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+    // let utcSeconds = 1234567890;
+    let d = new Date(0); // The 0 there is the key, which sets the date to the epoch
     d.setUTCSeconds(utcSeconds);
     return d;
 }
@@ -14,19 +15,18 @@ function votedORnot(){
     .then(response => {
       console.log(response);
       if(response[0]){
-        $("#voteForm").hide();
-
-        let validate = document.getElementById("voteValidate");
-        validate.innerHTML = "vote status:" + response[0] + "<br>" 
-                            + "vote time: " + date(response[1]) + "<br>"
-                            + "block mined: " + response[2]; 
+        document.getElementById('voteForm').style.display = "none";
+        let validate = document.getElementById("voteValidate");  
+        validate.style.display = "block"; 
+        validate.innerHTML = "<h5>You have already Voted</h5>"+"<br>" 
+                            + "<h6>"+date(response[1])+"</h6>"; 
 
       }
     })
 }
 
 function vote(candidateId){
-  // var candidateId = $('#candidatesSelect').val();
+  // let candidateId = $('#candidatesSelect').val();
   fetch('./vote',
   {
     method: 'post',
@@ -52,10 +52,12 @@ function vote(candidateId){
 
 function viewCandidates(){
     let voteForm = document.getElementById("voteForm");
-
+    let options = document.getElementById("options"); 
     let ballotID, canCount; 
-    var candidatesResults = $("#candidatesResults");
-    candidatesResults.empty();
+    let candidatesResults = document.getElementById("candidatesResults");
+    while(candidatesResults.firstChild){
+      candidatesResults.removeChild(candidatesResults.firstChild);
+    }
 
     fetch('/viewCandidates',{
       withCredentials: true,
@@ -67,8 +69,41 @@ function viewCandidates(){
       ballotID = response.id;
       canCount = response.canCount;
     })
-    .then(() => { 
-        for (var i = 1; i <= canCount; i++) { 
+    .then(() => {
+      
+        let votebutton = document.querySelector('#votebutton');
+        votebutton.addEventListener("click",function(){
+                 
+          fetch('./vote',
+          {
+            withCredentials: true,credentials: 'include',
+            method: 'post',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              
+            },
+            body: JSON.stringify({
+              id: document.getElementById('options').value, // send only candidate id
+            })
+          })
+          .then(function (response) {
+            console.log("vote casted!!, page will refresh");
+            viewCandidates();
+          }).then(function (response){
+                       
+            sweetAlert.fire({
+              title: 'Voting Successfull',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true
+            })
+               
+          })
+
+        });
+        for (let i = 1; i <= canCount; i++) { 
             fetch('./candidate_i',
             {
               withCredentials: true,
@@ -87,43 +122,14 @@ function viewCandidates(){
                   console.log(response);
                   
                   // render candidate vote count
-                  var row = "<tr><th>" + response.id + 
-                              "</th><td>" + response.name +
-                              "</th><td>" + response.voteCount + "</td></tr>";
+                  let row = "<tr><td>" + response.id + 
+                              "</td><td>" + response.name +
+                              "</td><td>" + response.voteCount + "</td></tr>";
 
-                  candidatesResults.append(row);
-
+                  candidatesResults.innerHTML+=row;
                   //  render candidate choice
-                  var candidate = document.createElement("div");  
-                  candidate.className = "dashcard";
-                  candidate.setAttribute("style", "float:left;"); 
-                  
-                  candidate.addEventListener("click", function(){
-                      fetch('./vote',
-                      {
-                        withCredentials: true,credentials: 'include',
-                        method: 'post',
-                        headers: {
-                          'Accept': 'application/json',
-                          'Content-Type': 'application/json',
-                          
-                        },
-                        body: JSON.stringify({
-                          id: response.id, // send only candidate id
-                        })
-                      })
-                      .then(function (response) {
-                        console.log("vote casted!!, page will refresh");
-                        viewCandidates();
-                      })
-                      .catch(function (error) {
-                        console.error(error);
-                      });
-                  });
-
-                  candidate.innerHTML = response.name;
-
-                  voteForm.appendChild(candidate);
+                  let candidate = `<option value="${response.id}">${response.name}</option>`
+                  options.innerHTML+=candidate;
 
             })
             .catch(function (error) {
@@ -135,3 +141,5 @@ function viewCandidates(){
 }
 
 viewCandidates();
+
+
