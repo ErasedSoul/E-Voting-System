@@ -6,8 +6,7 @@ async function showBallot(){
      method: 'POST',
      withCredentials: true,credentials: 'include', 
      headers: {
-       'Content-Type': 'application/json',
-       'Authorization': `Bearer ${sessionStorage['accessToken']}`
+       'Content-Type': 'application/json'
      },
      body: JSON.stringify({
          username: window.sessionStorage.userName,
@@ -35,8 +34,7 @@ async function showBallot(){
              method: 'post',
              headers: {
                'Accept': 'application/json',
-               'Content-Type': 'application/json',
-               'Authorization': `Bearer ${sessionStorage['accessToken']}`
+               'Content-Type': 'application/json'
              },
              body: JSON.stringify({
                id: ballots[i].id,

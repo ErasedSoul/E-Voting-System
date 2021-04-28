@@ -49,26 +49,9 @@ function generateOTP() {
     return OTP;
 }
 function generateAccessToken(user){
-    return jwt.sign(user,process.env.ACCESS_TOKEN_SECRET,{expiresIn: '10min'})
+    return jwt.sign(user,process.env.ACCESS_TOKEN_SECRET);
 }
 
-
-//create new token using refresh token
-router.post('/token',(req,res) => {
-
-    const refreshToken = req.body.token
-
-    if(refreshToken == null) return res.sendStatus(401);
-
-    if(refreshTokens.includes(refreshToken)) return res.sendStatus(403);
-
-    jwt.verify(refreshToken,process.env.REFRESH_TOKEN_SECRET,(err,user)=>{
-
-        if(err) return res.sendStatus(403);
-        const accessToken = generateAccessToken({name:user.name});
-        res.json({accessToken: accessToken});
-    })
-})
 
 
 //authentication of user
@@ -109,10 +92,8 @@ router.post('/login',(req,res) =>{
                             //Create new tokens on login
                             const user = {name: username};  
                             const accessToken = generateAccessToken(user);
-                            const refreshToken = jwt.sign(user,process.env.REFRESH_TOKEN_SECRET);
-
                             res.setHeader("SET-COOKIE","accessToken="+accessToken+"; HttpOnly");
-                            res.json({username: username,accessToken: accessToken, refreshToken: refreshToken,message : 'login successful',redirect: '/dashboard',check: '1'}).end();
+                            res.json({username: username,message : 'login successful',redirect: '/dashboard',check: '1'}).end();
                         }
                     }
                 })
@@ -120,6 +101,12 @@ router.post('/login',(req,res) =>{
             }
         }
     });
+})
+
+router.get('/logout',(req,res) => {
+
+    res.setHeader("SET-COOKIE","accessToken=;");
+    return res.sendStatus(200);
 })
 
 router.post('/signup',(req,res) =>{

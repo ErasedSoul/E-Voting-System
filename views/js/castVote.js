@@ -8,10 +8,7 @@ function date(utcSeconds){
 function votedORnot(){
     fetch('/votedORnot',{
       withCredentials: true,
-      credentials: 'include',
-        headers: {
-          'Authorization': `Bearer ${sessionStorage['accessToken']}`
-        }
+      credentials: 'include'
     })
     .then(response => response.json())    // one extra step
     .then(response => {
@@ -38,7 +35,7 @@ function vote(candidateId){
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${sessionStorage['accessToken']}`
+      
     },
     body: JSON.stringify({
       id: candidateId, // send only candidate id
@@ -62,10 +59,7 @@ function viewCandidates(){
 
     fetch('/viewCandidates',{
       withCredentials: true,
-      credentials: 'include',
-      headers: {
-        'Authorization': `Bearer ${sessionStorage['accessToken']}`
-      }
+      credentials: 'include'
     })
     .then(response => response.json())    // one extra step
     .then(response => {
@@ -83,7 +77,7 @@ function viewCandidates(){
               headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${sessionStorage['accessToken']}`
+                
               },
               body: JSON.stringify({
                 id: i, // send only candidate id
@@ -112,7 +106,7 @@ function viewCandidates(){
                         headers: {
                           'Accept': 'application/json',
                           'Content-Type': 'application/json',
-                          'Authorization': `Bearer ${sessionStorage['accessToken']}`
+                          
                         },
                         body: JSON.stringify({
                           id: response.id, // send only candidate id

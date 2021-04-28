@@ -3,10 +3,8 @@ function showBallot(){
     let ballotList = document.getElementById("ballotList");
 
     fetch('/getBallotCount',{
-      withCredentials: true,credentials: 'include',
-      headers: {
-        'Authorization': `Bearer ${sessionStorage['accessToken']}`
-      }
+      withCredentials: true,
+      credentials: 'include'
     })
     .then(response => response.json())    // one extra step
     .then(response => {
@@ -22,8 +20,7 @@ function showBallot(){
               method: 'post',
               headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${sessionStorage['accessToken']}`
+                'Content-Type': 'application/json'
               },
               body: JSON.stringify({
                 id: i,
@@ -41,8 +38,7 @@ function showBallot(){
                         withCredentials: true,credentials: 'include',
                         headers: {
                           'Accept': 'application/json',
-                          'Content-Type': 'application/json',
-                          'Authorization': `Bearer ${sessionStorage['accessToken']}`
+                          'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
                           id: response.id,

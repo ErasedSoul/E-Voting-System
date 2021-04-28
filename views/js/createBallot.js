@@ -219,7 +219,7 @@ async function validateSubmit(){
      credentials: 'include',
      headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${sessionStorage['accessToken']}`
+        
      },
      body: JSON.stringify({
          name: ballotName.value,

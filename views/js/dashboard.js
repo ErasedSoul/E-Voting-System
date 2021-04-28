@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     for(let i = 0;i < logoutClass.length;i++){
         logoutClass.item(i).addEventListener('click',function(){              
             sessionStorage.clear();
+            fetch('/logout').then();
         });
      }
   });
@@ -27,10 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
 fetch('/getAccounts',{
   withCredentials: true,
   credentials: 'include', 
-  headers: {
-     'Authorization': `Bearer ${sessionStorage['accessToken']}`
-  }
-
 })
 .then(response => response.json())    // one extra step
 .then(response => {
@@ -44,7 +41,6 @@ fetch('/setUserName',{
         credentials: 'include', 
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${sessionStorage['accessToken']}`
         },
         body: JSON.stringify({
             userName: window.sessionStorage.userName,
