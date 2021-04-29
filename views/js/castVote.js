@@ -90,10 +90,10 @@ function viewChart() {
 
     let ctx3 = document.getElementById('Polar').getContext('2d');
     let myChart3 = new Chart(ctx3, {
+        type: 'polarArea',
         data: {
             labels: canArray, // ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             datasets: [{  
-                type: 'polarArea',
                 label: '# polarArea view',
                 data: voteArray, // [12, 19, 3, 5, 2, 3],
                 backgroundColor:  bgColor, 
