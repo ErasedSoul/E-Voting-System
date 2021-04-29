@@ -61,8 +61,26 @@
                 <br/>
                 <a id="votebutton" class="waves-effect waves-light btn">VOTE</a>
               </div>
-              <div id = "voteValidate"> </div>   
+              <div id = "voteValidate"> </div> 
+
+
+              <div id="chartReport">
+                    <div class="tab">
+                    <button class="tablinks active" onclick="openChart(event, 'Bar')">Bar</button>
+                    <button class="tablinks" onclick="openChart(event, 'Doughnut')">Doughnut</button>
+                    <button class="tablinks" onclick="openChart(event, 'Polar')">Polar</button> 
+
+                    </div>
+
+                    <canvas id="Bar" class="tabcontent" ></canvas>
+                    <canvas id="Doughnut" class="tabcontent" style="display: none;"></canvas>
+                    <canvas id="Polar" class="tabcontent" style="display: none;"></canvas>
+              </div>
+             
+
        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" src="/js/materialize.min.js"></script>
     <script type="text/javascript" src="/js/dashboard.js"></script>
     <script type="text/javascript" src="/js/castVote.js"></script>
