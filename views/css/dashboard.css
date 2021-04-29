@@ -40,27 +40,108 @@ body{
 .sidenav-overlay{
   z-index: 1000;
 }
+#dashcard15 {
+  --bg-color: #66ff1a; 
+}
+
+#dashcard14 {
+  --bg-color: #bf66ff; 
+}
+
+#dashcard13 {
+  --bg-color: #dd99ff; 
+}
+
+#dashcard12 {
+  --bg-color: #dfff80; 
+}
+
+#dashcard11 {
+  --bg-color: #ff8080; 
+}
+
+#dashcard10 {
+  --bg-color: #ff99c2;
+}
+
+#dashcard9 {
+  --bg-color: #8cb3d9;
+}
+
+#dashcard8 {
+  --bg-color: #99ffff;
+}
+
+#dashcard7 {
+  --bg-color: #d9d9d9;
+}
+
 #dashcard6 {
   --bg-color: #ffd861;
 }
+
 #dashcard5{
   --bg-color: #B8F9D3;
 }
+
+#dashcard4 {
+  --bg-color: #ffcce6;
+}
+
+#dashcard3{
+  --bg-color: #DCE9FF;
+}
+
+#dashcard2{
+  --bg-color: #CEB2FC; 
+}
+
+#dashcard1{
+  --bg-color:  #99ff99; 
+}
+
+/*
+#dashcard6 {
+  --bg-color: #ffd861;
+  --bg-color-light: #ffeeba;
+  --text-color-hover: #00000;
+  --box-shadow-color: rgba(255, 215, 97, 0.48);
+}
+#dashcard5{
+  --bg-color: #B8F9D3;
+  --bg-color-light: #e2fced;
+  --text-color-hover: #4C5656;
+  --box-shadow-color: rgba(184, 249, 211, 0.48);
+}
 #dashcard4 {
   --bg-color: #ffd861;
+  --bg-color-light: #ffeeba;
+  --text-color-hover: #00000;
+  --box-shadow-color: rgba(255, 215, 97, 0.48);
 }
 
 #dashcard3{
   --bg-color: #B8F9D3;
+  --bg-color-light: #e2fced;
+  --text-color-hover: #4C5656;
+  --box-shadow-color: rgba(184, 249, 211, 0.48);
 }
 
 #dashcard2{
   --bg-color: #CEB2FC;
+  --bg-color-light: #F0E7FF;
+  --text-color-hover: #fff;
+  --box-shadow-color: rgba(206, 178, 252, 0.48);
 }
 
 #dashcard1{
   --bg-color: #DCE9FF;
+  --bg-color-light: #f1f7ff;
+  --text-color-hover: #4C5656;
+  --box-shadow-color: rgba(220, 233, 255, 0.48);
 }
+
+*/
 
 .dashcard{
   height: 200px;
