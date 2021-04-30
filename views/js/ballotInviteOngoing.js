@@ -13,8 +13,8 @@ async function showBallot(){
      })
      })
  
-    let data = await res.json();
-    ballots = data.ballots;
+    let ballots = await res.json();
+    //ballots = data.ballots;
  
     console.log(ballots.length);
  
@@ -44,10 +44,10 @@ async function showBallot(){
              }); 
        });
           */
-         card.innerHTML+= "<p>" + ballots[i].bname + "<br>" +
-         "ballot id :"+ballots[i].bid+"<br>"+
-         "starting from:" + ballots[i].startTime + "<br>" +
-         "ending at:" + ballots[i].endTime + "</p>";
+       card.innerHTML+= "<p>" + ballots[i].bname + "<br>" +
+       "ballot id :"+ballots[i].ballotid+"<br>"+
+       "starting from:" + ballots[i].startdate + "<br>" +
+       "ending at:" + ballots[i].enddate + "</p>";
          
          ballotList.appendChild(card);
     }
