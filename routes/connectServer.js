@@ -24,7 +24,7 @@ function auth(req,res,next){
     if(token == null ) return res.sendStatus(401);
     jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,user)=>{
          if(err) return res.sendStatus(401);
-         res.username = user;  
+		 res.username = user;
          next();
     })
 }
@@ -80,6 +80,49 @@ function auth(req,res,next){
 	  let startTime = req.body.startTime;
 	  let endTime = req.body.endTime;
 	  let canString = req.body.canString;
+	  let userid = req.res.username.name;
+	  let voters = req.body.voters;
+	  console.log("Ballotid2: "+userid+" "+req.res.username.name);
+
+	  //username#count
+	  let ballotid = userid;
+	  let sqlcount = "SELECT COUNT(*) as `count` FROM `ballots` WHERE `userid` = ?";
+	  db.query(sqlcount, [userid], (err,result)=>{
+		if(err)
+		{
+			throw err;
+		}
+		else {
+			console.log("result: "+JSON.stringify(result)+" "+result[0]);
+			ballotid = ballotid+"#"+(result[0][`count`]+1);
+			
+			let sqlball = "INSERT INTO ballots VALUES(?, ?, ?, ?, ?)";
+			db.query(sqlball, [ballotid, name,startTime, endTime, userid], (err, result)=>{
+				if(err)
+				{
+					throw err;
+				}
+				else {
+					console.log("Ballot details inserted in ballots!"+result[0]+" "+voters[0]);
+					
+				}
+			});
+			console.log("Ballotid: "+ballotid);
+			for(let i = 0; i<voters.length; i++)
+			{
+				let voteballot = "INSERT INTO `voter-ballot` VALUES(?, ?)";
+				db.query(voteballot, [voters[i],ballotid], (err,result) =>{
+					if(err)
+					{
+						throw err;
+					}
+					else {
+						console.log("Ballot details inserted in voter-ballot!"+JSON.stringify(result));
+					}
+				})
+			}
+}
+	  })
 
 	  truffle_connect.setBallot(name, startTime, endTime, canString, (response) => {
 		console.log(response);

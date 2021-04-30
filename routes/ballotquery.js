@@ -16,11 +16,8 @@ const db = mysql.createConnection({
 });
 
 router.post('/user/ongoing',auth,(req,res)=>{
-    const username = req.body.username;
-    //let ballots = [];
+    const username = req.res.username.name;
     
-    //do sql query and just console.log the output or just send the query object in res.send()
-
     let sqlball = "SELECT * FROM ballots WHERE `userid` = ? AND `startdate`<=CURRENT_TIMESTAMP AND CURRENT_TIMESTAMP<`enddate` ";
     db.query(sqlball, [username], (err, result)=>{
         if(err)
@@ -29,25 +26,16 @@ router.post('/user/ongoing',auth,(req,res)=>{
         }
         else {
             res.send(result);
-            //console.log("Ballot details inserted in ballots!"+result[0].ballotid);
         }
     });
 
-    /*ballots.push({bid: "#3232", bname: "vote 1",startTime: "12-32-34",endTime:"2323"});
-    ballots.push({bid: "#3323", bname: "vote 2",startTime: "12-32-34",endTime:"2323"});
-    res.setHeader('Content-Type', 'application/json');
-    res.json({ballots: ballots});*/
-    
     return;
 })
 
 
 router.post('/user/finished',auth,(req,res)=>{
 
-    //do sql query and just console.log the output or just send the query object in res.send()
-
-    const username = req.body.username;
-    //let ballots = [];
+    const username = req.res.username.name;
 
     let sqlball = "SELECT * FROM ballots WHERE `userid` = ? AND CURRENT_TIMESTAMP>`enddate` ";
     db.query(sqlball, [username], (err, result)=>{
@@ -67,10 +55,7 @@ router.post('/user/finished',auth,(req,res)=>{
 
 router.post('/user/upcoming',auth,(req,res)=>{
 
-    const username = req.body.username;
-    //let ballots = [];
-    
-    //do sql query and just console.log the output or just send the query object in res.send()
+    const username = req.res.username.name;
 
     let sqlball = "SELECT * FROM ballots WHERE `userid` = ? AND CURRENT_TIMESTAMP<`startdate` ";
     db.query(sqlball, [username], (err, result)=>{
@@ -88,31 +73,61 @@ router.post('/user/upcoming',auth,(req,res)=>{
 })
 
 
-
-
-
-router.post('/invites/ongoing',auth,(req,res)=>{
+router.post('/invite/ongoing',auth,(req,res)=>{
     
-    const username = request.body.username;
-//do sql query and just console.log the output or just send the query object in res.send()
+    const username = req.res.username.name;
+    
+    let sqlball = "SELECT * FROM `ballots` AS b,`voter-ballot` AS vb WHERE vb.`userid`= ? AND vb.`ballotid` = b.`ballotid` AND b.`startdate`<=CURRENT_TIMESTAMP AND CURRENT_TIMESTAMP<b.`enddate` ";
+    db.query(sqlball, [username], (err, result)=>{
+        if(err)
+        {
+            throw err;
+        }
+        else {
+            console.log(JSON.stringify(result));
+            res.send(result);
+        }
+    });
 
-    res.send("Hello World");
 })
 
 
-router.post('/invites/finished',auth,(req,res)=>{
+router.post('/invite/finished',auth,(req,res)=>{
+
+    const username = req.res.username.name;
+
+    console.log("ballotquery.js ----> "+username);
     
-//do sql query and just console.log the output or just send the query object in res.send()
-    
-    res.send("Hello World");
+    let sqlball = "SELECT * FROM `ballots` AS b,`voter-ballot` AS vb WHERE vb.`userid`= ? AND vb.`ballotid` = b.`ballotid` AND CURRENT_TIMESTAMP>b.`enddate` ";
+    db.query(sqlball, [username], (err, result)=>{
+        if(err)
+        {
+            throw err;
+        }
+        else {
+            console.log(JSON.stringify(result));
+            res.send(result);
+        }
+    });
+
 })
 
-router.post('/invites/upcoming',auth,(req,res)=>{
+router.post('/invite/upcoming',auth,(req,res)=>{
+
+    const username = req.res.username.name;
     
-//do sql query and just console.log the output or just send the query object in res.send()
+    let sqlball = "SELECT * FROM `ballots` AS b,`voter-ballot` AS vb WHERE vb.`userid`= ? AND vb.`ballotid` = b.`ballotid` AND CURRENT_TIMESTAMP< b.`startdate` ";
+    db.query(sqlball, [username], (err, result)=>{
+        if(err)
+        {
+            throw err;
+        }
+        else {
+            console.log(JSON.stringify(result));
+            res.send(result);
+        }
+    });
 
-
-    res.send("Hello World");
 })
 
 function auth(req,res,next){
