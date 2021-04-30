@@ -28,7 +28,7 @@ async function showBallot(){
          let ov = document.createElement("div");  
          ov.className = "overlay";
          card.appendChild(ov);
-        /* 
+         
          card.addEventListener("click", function() {
            fetch('./setBallotID',{
              method: 'post',
@@ -43,7 +43,7 @@ async function showBallot(){
            window.location = "http://localhost:4000/castVote";  
              }); 
        });
-          */
+          
        card.innerHTML+= "<p>" + ballots[i].bname + "<br>" +
        "ballot id :"+ballots[i].ballotid+"<br>"+
        "starting from:" + ballots[i].startdate + "<br>" +
