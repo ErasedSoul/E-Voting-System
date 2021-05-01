@@ -75,6 +75,23 @@ module.exports = {
     });
   }, 
 
+    currentBallot : (callback)=> {
+    var self = this;
+    Election.deployed().then(function(instance) {
+        return instance.ballots(ballotID);
+    }).then( (ballot) => {
+          var id = parseInt(ballot[0]);
+          var name = ballot[1];
+          var startTime = ballot[2];
+          var endTime = ballot[3];
+          var canCount = parseInt(ballot[4]);
+          callback({id, name, startTime, endTime, canCount});
+    }).catch((error)=> {
+      console.log(error);
+      callback("ERROR 404");
+    });
+  }, 
+
   // add a new ballot
   setBallot: (name, startTime, endTime, canString, callback)=> {
     var self = this;
@@ -91,16 +108,16 @@ module.exports = {
 
   setBallotID: (id, callback)=>{
     var self = this;
-    ballotID = id;
-    console.log("ballot selected is: ", ballotID ); 
+    ballotID = parseInt(id);
+    console.log("ballot selected is: ", id ); 
     callback("Done!!"); 
   }, 
 
   viewCandidates : (callback)=> {
     var self = this;
-    Election.deployed().then(function(instance) {
+    Election.deployed().then(function(instance) { 
         return instance.ballots(ballotID);
-    }).then( (ballot) => {
+    }).then( (ballot) => {      // console.log("ballot: ", ballot);
           var id = parseInt(ballot[0]);
           var name = ballot[1];
           var startTime = ballot[2];
@@ -130,7 +147,7 @@ module.exports = {
 
   votedORnot : (callback)=> { // id refers to candidate id
     var self = this;
-    Election.deployed().then(function(instance) {
+    Election.deployed().then(function(instance) { 
         return instance.votedORnot(ballotID, userName);
     }).then( (status) => { 
           callback(status);

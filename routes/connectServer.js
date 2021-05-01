@@ -73,6 +73,13 @@ function auth(req,res,next){
 	  });
 	});
 
+	router.get('/currentBallot',auth,(req, res) => {
+	  console.log("**** GET / currentBallot ****");
+	  truffle_connect.currentBallot(function (answer) {
+	    res.send(answer);
+	  })
+	});
+
 	router.post('/setBallot',auth, (req, res) => {
 	  console.log("**** post /setBallot ****");
 	  console.log("data to post: ", req.body);
@@ -82,19 +89,36 @@ function auth(req,res,next){
 	  let canString = req.body.canString;
 	  let userid = req.res.username.name;
 	  let voters = req.body.voters;
-	  console.log("Ballotid2: "+userid+" "+req.res.username.name);
+
+	  	// include all
+		if(voters.length === 0){
+			let sqlAllVote = "SELECT userid FROM `voters`";
+			db.query(sqlAllVote, (err,res)=>{
+				if(err) throw err;
+				else{
+					for(let i = 0; i < res.length; i++) voters.push(res[i].userid);
+					//console.log(voters);
+				}
+			});
+		}
+	  // console.log("Ballotid2: "+userid+" "+req.res.username.name);
 
 	  //username#count
-	  let ballotid = userid;
-	  let sqlcount = "SELECT COUNT(*) as `count` FROM `ballots` WHERE `userid` = ?";
-	  db.query(sqlcount, [userid], (err,result)=>{
+	  let ballotid = 0; // userid;
+	  // let sqlcount = "SELECT COUNT(*) as `count` FROM `ballots` WHERE `userid` = ?";
+	  let sqlcount = "SELECT COUNT(*) as `count` FROM `ballots` ";
+
+	  //db.query(sqlcount, [userid], (err,result)=>{
+	  db.query(sqlcount, (err,result)=>{
 		if(err)
 		{
 			throw err;
 		}
 		else {
 			console.log("result: "+JSON.stringify(result)+" "+result[0]);
-			ballotid = ballotid+"#"+(result[0][`count`]+1);
+			// ballotid = ballotid+"#"+(result[0][`count`]+1);
+
+			ballotid = (result[0][`count`]+1); // console.log("Ballotid: "+ballotid);
 			
 			let sqlball = "INSERT INTO ballots VALUES(?, ?, ?, ?, ?)";
 			db.query(sqlball, [ballotid, name,startTime, endTime, userid], (err, result)=>{
@@ -104,10 +128,11 @@ function auth(req,res,next){
 				}
 				else {
 					console.log("Ballot details inserted in ballots!"+result[0]+" "+voters[0]);
-					
 				}
 			});
-			console.log("Ballotid: "+ballotid);
+			// console.log("Ballotid: "+ballotid);
+
+
 			for(let i = 0; i<voters.length; i++)
 			{
 				let voteballot = "INSERT INTO `voter-ballot` VALUES(?, ?)";
@@ -121,8 +146,8 @@ function auth(req,res,next){
 					}
 				})
 			}
-}
-	  })
+		}
+	  });
 
 	  truffle_connect.setBallot(name, startTime, endTime, canString, (response) => {
 		console.log(response);
