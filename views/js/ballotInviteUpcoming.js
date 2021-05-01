@@ -22,7 +22,7 @@ async function showBallot(){
     for(let i = 0;i < ballots.length;i++)
     {
         let card = document.createElement("div");  
-        card.id = "dashcard" + ((i%6) + 1);
+        card.id = "dashcard"+((Math.floor((Math.random() * 100) + 1))%16);
         card.className = "dashcard";
         card.setAttribute("style", "float:left;");
         let ov = document.createElement("div");  

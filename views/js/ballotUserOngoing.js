@@ -1,3 +1,10 @@
+function TimeConvert(t)
+{
+     let date = new Date(t);
+     return date;
+}
+
+
 async function showBallot(){
 
    const url = "http://localhost:4000/user/ongoing";
@@ -20,7 +27,7 @@ async function showBallot(){
     for(let i = 0;i < ballots.length;i++)
     {
         let card = document.createElement("div");  
-        card.id = "dashcard" + ((i%6) + 1);
+        card.id = "dashcard"+((Math.floor((Math.random() * 100) + 1))%16);
         card.className = "dashcard";
         card.setAttribute("style", "float:left;");
         let ov = document.createElement("div");  
@@ -44,8 +51,8 @@ async function showBallot(){
          
         card.innerHTML+= "<p>" + ballots[i].bname + "<br>" +
         "ballot id :"+ballots[i].ballotid+"<br>"+
-        "starting from:" + ballots[i].startdate + "<br>" +
-        "ending at:" + ballots[i].enddate + "</p>";
+        "starting from:" + TimeConvert(ballots[i].startdate)+ "<br>" +
+        "ending at:" + TimeConvert(ballots[i].enddate)+ "</p>";
         
         ballotList.appendChild(card);
     }

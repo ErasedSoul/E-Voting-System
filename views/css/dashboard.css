@@ -1,5 +1,9 @@
 
-  
+html{
+  background-image: url("/img/background.svg");
+  background-size: cover;
+}
+
 body{
   /*background:linear-gradient(rgba(196, 102, 0, 0.2), rgba(155, 89, 182, 0.2)),	url('http://thecodeplayer.com/uploads/media/gs.png');*/
   background-image: url("/img/background.svg");
@@ -100,48 +104,9 @@ body{
   --bg-color:  #99ff99; 
 }
 
-/*
-#dashcard6 {
-  --bg-color: #ffd861;
-  --bg-color-light: #ffeeba;
-  --text-color-hover: #00000;
-  --box-shadow-color: rgba(255, 215, 97, 0.48);
+#dashcard0{
+  --bg-color:  #99ff99; 
 }
-#dashcard5{
-  --bg-color: #B8F9D3;
-  --bg-color-light: #e2fced;
-  --text-color-hover: #4C5656;
-  --box-shadow-color: rgba(184, 249, 211, 0.48);
-}
-#dashcard4 {
-  --bg-color: #ffd861;
-  --bg-color-light: #ffeeba;
-  --text-color-hover: #00000;
-  --box-shadow-color: rgba(255, 215, 97, 0.48);
-}
-
-#dashcard3{
-  --bg-color: #B8F9D3;
-  --bg-color-light: #e2fced;
-  --text-color-hover: #4C5656;
-  --box-shadow-color: rgba(184, 249, 211, 0.48);
-}
-
-#dashcard2{
-  --bg-color: #CEB2FC;
-  --bg-color-light: #F0E7FF;
-  --text-color-hover: #fff;
-  --box-shadow-color: rgba(206, 178, 252, 0.48);
-}
-
-#dashcard1{
-  --bg-color: #DCE9FF;
-  --bg-color-light: #f1f7ff;
-  --text-color-hover: #4C5656;
-  --box-shadow-color: rgba(220, 233, 255, 0.48);
-}
-
-*/
 
 .dashcard{
   height: 200px;
@@ -151,7 +116,7 @@ body{
   --bg-color-light: #e2fced;
   --text-color-hover: #4C5656;
   --box-shadow-color: rgba(184, 249, 211, 0.48);
-  border-top-right-radius: 10px;
+  border-radius: 10px;
   margin: 50px;
   overflow: hidden;
   display: flex;

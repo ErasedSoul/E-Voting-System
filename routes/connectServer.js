@@ -89,7 +89,8 @@ function auth(req,res,next){
 	  let canString = req.body.canString;
 	  let userid = req.res.username.name;
 	  let voters = req.body.voters;
-
+       console.log("Start Time :  "+startTime);
+	   console.log("Start Time :  "+endTime);
 	  	// include all
 		if(voters.length === 0){
 			let sqlAllVote = "SELECT userid FROM `voters`";
