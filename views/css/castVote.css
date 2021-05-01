@@ -1,4 +1,4 @@
-#voteForm,#voteValidate, table {
+#voteForm,#voteValidate, #ballotValidate, table {
     border-collapse: collapse;
     box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
     background-color: #ffffff;
@@ -8,7 +8,7 @@
     min-width: 300px;
 }
 
-#voteValidate{
+#voteValidate,#ballotValidate {
     margin-top: 30px;
     text-align: center;
     display: none;
