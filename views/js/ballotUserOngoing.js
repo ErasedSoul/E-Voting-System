@@ -16,11 +16,9 @@ async function showBallot(){
    let ballots = await res.json();
    //ballots = data.ballots;
 
-   console.log(ballots.length);
 
-
-   for(let i = 0;i < ballots.length;i++)
-   {
+    for(let i = 0;i < ballots.length;i++)
+    {
         let card = document.createElement("div");  
         card.id = "dashcard" + ((i%6) + 1);
         card.className = "dashcard";
@@ -30,14 +28,14 @@ async function showBallot(){
         card.appendChild(ov);
         
         card.addEventListener("click", function() {
-          fetch('./setBallotID',{
+          fetch('http://localhost:4000/setBallotID',{
             method: 'post',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              id: ballots[i].id,
+              id: ballots[i].ballotid,
             })
           }).then( () => { 
           window.location = "http://localhost:4000/castVote";  
@@ -50,7 +48,7 @@ async function showBallot(){
         "ending at:" + ballots[i].enddate + "</p>";
         
         ballotList.appendChild(card);
-   }
+    }
      
 }
 showBallot();
