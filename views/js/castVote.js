@@ -1,4 +1,4 @@
-
+// global variables 
 let canArray = [];
 let voteArray = []; 
 let bgColor = [
@@ -18,6 +18,9 @@ let brColor=  [
     'rgba(255, 159, 64, 1)'
     ]; 
 
+/*******************************************************************/
+
+// funtion for tab in the canvas 
 function openChart(evt, chartName) {
   let tabcontent = document.getElementsByClassName("tabcontent");
   for (let i = 0; i < tabcontent.length; i++) {
@@ -31,6 +34,7 @@ function openChart(evt, chartName) {
   evt.currentTarget.className += " active";
 }
 
+// funtion for painting in canvas 
 function viewChart() {
     // document.querySelector("#chartReport").innerHTML = '<canvas id="myChart"></canvas>';
     let ctx1 = document.getElementById('Bar').getContext('2d');
@@ -113,6 +117,9 @@ function viewChart() {
 
 }
 
+/************************end of canvas ****************************/
+
+// convert utcSecond to date
 function date(utcSeconds){
     // let utcSeconds = 1234567890;
     let d = new Date(0); // The 0 there is the key, which sets the date to the epoch
@@ -120,6 +127,7 @@ function date(utcSeconds){
     return d;
 }
 
+// function for voter already casted vote or not
 function votedORnot(){
     fetch('/votedORnot',{
       withCredentials: true,
@@ -127,7 +135,7 @@ function votedORnot(){
     })
     .then(response => response.json())    // one extra step
     .then(response => {
-      console.log(response);
+      // console.log(response);
       if(response[0]){
         document.getElementById('voteForm').style.display = "none";
         let validate = document.getElementById("voteValidate");  
@@ -139,15 +147,62 @@ function votedORnot(){
     })
 }
 
-function viewCandidates(){  
+// function for ballot is live or not
+function ongoingOrNot(){
+    fetch('/currentBallot',{
+      withCredentials: true,
+      credentials: 'include'
+    })
+    .then(response => response.json())    // one extra step
+    .then(response => { 
+      let st = new Date(response.startTime); 
+      let et = new Date(response.endTime); 
+      let ct = new Date(); 
+      if(ct.getTime() > et.getTime()) {
+          // console.log("past");
+          document.getElementById('voteForm').style.display = "none";
+          let validate = document.getElementById("ballotValidate");  
+          validate.style.display = "block"; 
+          validate.innerHTML = "<h5>This ballot has expired at</h5>"+"<br>" 
+                            + "<h6>"+ et +"</h6>"; 
+      }
+      else if(ct.getTime() < st.getTime()){
+          // console.log("future");
+          document.getElementById('voteForm').style.display = "none";
+          let validate = document.getElementById("ballotValidate");  
+          validate.style.display = "block"; 
+          validate.innerHTML = "<h5>This ballot will start at</h5>"+"<br>" 
+                            + "<h6>"+ st +"</h6>"; 
+      }
+      else console.log("cuur");
 
-    let voteForm = document.getElementById("voteForm");
+    })
+}
+
+/****************** end of time functions *************************/ 
+
+function viewTable() {
     let options = document.getElementById("options"); 
-    let ballotID, canCount; 
     let candidatesResults = document.getElementById("candidatesResults");
-    while(candidatesResults.firstChild){
+    /*while(candidatesResults.firstChild){
       candidatesResults.removeChild(candidatesResults.firstChild);
+    }*/ 
+
+    for(let i = 0; i < canArray.length; i++){
+        // render candidate vote count
+        let row = "<tr><td>" + (i+1) + 
+                    "</td><td>" + canArray[i] +
+                    "</td><td>" + voteArray[i] + "</td></tr>";
+
+        candidatesResults.innerHTML+=row;
+        //  render candidate choice
+        let candidate = `<option value="${i+1}">${canArray[i]}</option>`
+        options.innerHTML+=candidate;
     }
+
+}
+
+function viewCandidates(){  
 
     fetch('/viewCandidates',{
       withCredentials: true,
@@ -179,7 +234,7 @@ function viewCandidates(){
           })
           .then(function (response) {
             console.log("vote casted!!, page will refresh");
-            viewCandidates();
+            // viewCandidates();
           }).then(function (response){
                        
             sweetAlert.fire({
@@ -188,8 +243,9 @@ function viewCandidates(){
               showConfirmButton: false,
               timer: 2000,
               timerProgressBar: true
-            })
-               
+            }).then(() => {
+                  window.location = "http://localhost:4000/castVote";  
+              });
           })
 
         });
@@ -210,32 +266,22 @@ function viewCandidates(){
             }).then(response => response.json()) 
             .then(function (response) {
                   //console.log(response);
-                  
-                  // render candidate vote count
-                  let row = "<tr><td>" + response.id + 
-                              "</td><td>" + response.name +
-                              "</td><td>" + response.voteCount + "</td></tr>";
-
-                  candidatesResults.innerHTML+=row;
-                  //  render candidate choice
-                  let candidate = `<option value="${response.id}">${response.name}</option>`
-                  options.innerHTML+=candidate;
-
                   canArray.push(response.name); 
                   voteArray.push(response.voteCount);  // x += response.name; console.log(x);
 
-                  if(i == canCount) viewChart();
-
+                  if(i == canCount) {
+                      viewChart();
+                      viewTable();
+                  }
             })
             .catch(function (error) {
               console.error(error);
             });
         } 
     }) 
+    .then( ongoingOrNot() )
     .then( votedORnot() )
     .catch(error => console.error(error));
 }
 
 viewCandidates();
-
-
