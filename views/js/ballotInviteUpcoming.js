@@ -1,3 +1,8 @@
+function TimeConvert(t)
+{
+     let date = new Date(t);
+     return date;
+}
 async function showBallot(){
 
     const url = "http://localhost:4000/invite/upcoming";
@@ -44,12 +49,51 @@ async function showBallot(){
             }); 
       });
          
-        card.innerHTML+= "<p>" + ballots[i].bname + "<br>" +
-        "ballot id :"+ballots[i].ballotid+"<br>"+
-        "starting from:" + ballots[i].startdate + "<br>" +
-        "ending at:" + ballots[i].enddate + "</p>";
+      //name
+      let ballotName = document.createElement("div");
+      ballotName.className = "ballotName";
+      ballotName.innerHTML = ballots[i].bname;  
+      
+      //status
+      let status  = document.createElement("div");
+      status.className = "status";
+      let upcoming = document.createElement("div");
+      upcoming.className = "upcoming";
+      let statusWord = document.createElement("div");
+      statusWord.className = "statusWord";
+      statusWord.innerHTML = "UPCOMING"; 
+      status.appendChild(upcoming);
+      status.appendChild(statusWord);
+
+      //timeShow
+      let startDate = TimeConvert(ballots[i].startdate);
+      let endDate = TimeConvert(ballots[i].enddate); 
+      let seconds = (startDate- Date.now())/1000;
+      let timeShow = document.createElement("div");
+      timeShow.className = "timeShow";
+      timeShow.id = ballots[i].ballotid;
+      //timeShow.innerHTML= "Ends in "+seconds;
+
+
+      //timer code
+      let timer = new easytimer.Timer();
+      timer.start({countdown: true, startValues: {seconds: seconds}});
+        timeShow.innerHTML = "STARTS IN "+timer.getTimeValues().toString();
+
+        timer.addEventListener('secondsUpdated', function (e) {
+            timeShow.innerHTML = "STARTS IN "+timer.getTimeValues().toString();
+        });
+
+        timer.addEventListener('targetAchieved', function (e) {
+            timeShow.innerHTML = 'STARTED';
+        });
+
+      //add everyting in card
+      card.appendChild(ballotName);
+      card.appendChild(status);
+      card.appendChild(timeShow);
+      ballotList.appendChild(card);
         
-        ballotList.appendChild(card);
     }
           
  }

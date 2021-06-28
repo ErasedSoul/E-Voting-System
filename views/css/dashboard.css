@@ -164,3 +164,87 @@ body{
   z-index: 3;
   transition: color 1s ease-out;
 }
+
+.ballotName {
+   position: absolute;
+   font-size: 17px;
+   color: rgb(0, 0, 0);
+   background-color:  white;
+   z-index: 4;
+   transform: translate(0%,-20px);
+   border-radius: 10rem;
+   margin: 0px;
+   padding: 10px;
+}
+
+.timeShow {
+  position: absolute;
+  font-size: 17px;
+  color: rgb(0, 0, 0);
+  background-color: white;
+  z-index: 4;
+  border-radius: 10rem;
+  bottom: 3px;
+  margin: 0px;
+  padding: 4px;
+}
+
+
+.status{
+     position: absolute;
+     font-size: 17px;
+     color: black;
+     background-color: white;
+     z-index: 4;
+     top: 5px;
+     right: 5px;
+     margin: 5px;
+     padding-left: 3px;
+     padding-right: 3px;
+     border-radius: 10px;
+}
+
+.live{
+    position: relative;
+    width: 15px;
+    height: 15px;
+    z-index: 4;
+    border-radius: 50%;
+    margin: 2px;
+    background-color: rgb(91, 201, 91);
+    float: left;
+    display: inline;
+    transform: translateY(3px);
+}
+.ended{
+  position: relative;
+  width: 15px;
+  height: 15px;
+  z-index: 4;
+  border-radius: 50%;
+  margin: 2px;
+  background-color: rgb(219, 78, 78);
+  float: left;
+  display: inline;
+  transform: translateY(3px);    
+}
+
+.upcoming{
+  position: relative;
+  width: 15px;
+  height: 15px;
+  z-index: 4;
+  border-radius: 50%;
+  margin: 2px;
+  background-color: rgb(98, 121, 223);
+  float: left;
+  display: inline;
+  transform: translateY(3px);  
+}
+.statusWord{
+  position: relative;
+  z-index: 4;
+  margin: 2px;
+  padding: 2px;
+  display: inline;
+}

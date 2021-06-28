@@ -44,11 +44,32 @@ async function showBallot(){
             }); 
       });
          
-        card.innerHTML+= "<p>" + ballots[i].bname + "<br>" +
-        "ballot id :"+ballots[i].ballotid+"<br>"+
-        "starting from:" + ballots[i].startdate + "<br>" +
-        "ending at:" + ballots[i].enddate + "</p>";
+        //name
+        let ballotName = document.createElement("div");
+        ballotName.className = "ballotName";
+        ballotName.innerHTML = ballots[i].bname;  
         
+        //status
+        let status  = document.createElement("div");
+        status.className = "status";
+        let ended = document.createElement("div");
+        ended.className = "ended";
+        let statusWord = document.createElement("div");
+        statusWord.className = "statusWord";
+        statusWord.innerHTML = "ENDED"; 
+        status.appendChild(ended);
+        status.appendChild(statusWord);
+
+        
+        let timeShow = document.createElement("div");
+        timeShow.className = "timeShow";
+        timeShow.id = ballots[i].ballotid;
+        timeShow.innerHTML= "EXPIRED";
+
+        //add everyting in card
+        card.appendChild(ballotName);
+        card.appendChild(status);
+        card.appendChild(timeShow);
         ballotList.appendChild(card);
     }
       

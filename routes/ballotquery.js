@@ -77,7 +77,7 @@ router.post('/invite/ongoing',auth,(req,res)=>{
     
     const username = req.res.username.name;
     
-    let sqlball = "SELECT * FROM `ballots` AS b,`voter-ballot` AS vb WHERE vb.`userid`= ? AND vb.`ballotid` = b.`ballotid` AND b.`startdate`<=CURRENT_TIMESTAMP AND CURRENT_TIMESTAMP<b.`enddate` ";
+    let sqlball = "SELECT * FROM `ballots` AS b,`voter-ballot` AS vb WHERE vb.`userid`= ? AND vb.`ballotid` = b.`ballotid` AND b.`startdate`<=CURRENT_TIMESTAMP AND CURRENT_TIMESTAMP<b.`enddate`";
     db.query(sqlball, [username], (err, result)=>{
         if(err)
         {
